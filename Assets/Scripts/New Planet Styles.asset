@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1632b3661ca9a6f4392bbe38cf91fb55, type: 3}
+  m_Name: New Planet Styles
+  m_EditorClassIdentifier: 
+  colorStyles:
+  - body: {r: 0, g: 0, b: 0, a: 0}
+    fresnel: {r: 1, g: 1, b: 1, a: 0}
+  - body: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 0}
+    fresnel: {r: 1, g: 1, b: 1, a: 0}
+  - body: {r: 1, g: 0, b: 0, a: 0}
+    fresnel: {r: 1, g: 0.52359486, b: 0, a: 0}
+  - body: {r: 0.17888929, g: 0.2546052, b: 0.5660378, a: 0}
+    fresnel: {r: 0.057849795, g: 0.87345153, b: 0.9433962, a: 0}
+  - body: {r: 0.8679245, g: 0.27429688, b: 0.8627173, a: 0}
+    fresnel: {r: 0.7452365, g: 0.46764863, b: 0.8773585, a: 0}
+  - body: {r: 1, g: 0.9094448, b: 0, a: 0}
+    fresnel: {r: 1, g: 0.16509432, b: 0.16509432, a: 0}
+  - body: {r: 0.076628685, g: 0.3962264, b: 0.24859889, a: 0}
+    fresnel: {r: 0.3443396, g: 1, b: 0.6268037, a: 0}
+  - body: {r: 0.16959512, g: 0.16264686, b: 0.4056604, a: 0}
+    fresnel: {r: 0.90256625, g: 0.6309185, b: 0.9622642, a: 0}
+  - body: {r: 0.38679248, g: 0.26685035, b: 0.11494304, a: 0}
+    fresnel: {r: 0.8867924, g: 0.7635245, b: 0.43921322, a: 0}
+  - body: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 0}
+    fresnel: {r: 1, g: 0, b: 0.14786863, a: 0}
+  - body: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 0}
+    fresnel: {r: 0, g: 0.67599964, b: 1, a: 0}
+  - body: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 0}
+    fresnel: {r: 1, g: 0.88169324, b: 0, a: 0}
+  - body: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 0}
+    fresnel: {r: 0.7191477, g: 0, b: 1, a: 0}
+  - body: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 0}
+    fresnel: {r: 0.3037113, g: 0.990566, b: 0.6500593, a: 0}
+  - body: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0}
+    fresnel: {r: 0, g: 0, b: 0, a: 0}
+  - body: {r: 0.5566038, g: 0.06563723, b: 0.06563723, a: 0}
+    fresnel: {r: 0, g: 0, b: 0, a: 0}
+  - body: {r: 0.2166103, g: 0.20278569, b: 0.46226418, a: 0}
+    fresnel: {r: 0, g: 0, b: 0, a: 0}
+  - body: {r: 0.4339623, g: 0.29388154, b: 0.06755074, a: 0}
+    fresnel: {r: 0, g: 0, b: 0, a: 0}
+  bumpScales:
+  - 5
+  - 8
+  - 10
+  - 15
+  - 20
+  - 25
+  - 30
+  bumpIntensities:
+  - 0.1
+  - 0.12
+  - 0.15
+  - 0.16
+  - 0.2
+  - 0.3
+  - 0.21
+  - 0.22
+  - 0.23
+  - 0.3
+  - 0.35
+  - 0.4
+  - 0.45
+  - 0.5
+  cloudScales:
+  - 8
+  - 10
+  - 12
+  - 6
+  - 7
+  - 8
+  - 9
+  - 7
+  - 5
+  cloudAlphaClips:
+  - 1
+  - 0.9
+  - 0.8
+  - 0.7
+  - 0.6
+  - 0.5
+  - 0.4
+  - 0.3
+  - 10
+  - 0
+  - 0.1
+  - 0.45
+  - 0
+  - 0.1
+  - 0.2
+  - 0.5
+  cloudColors:
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 0}
+  - {r: 0, g: 0.60029435, b: 1, a: 0}
+  - {r: 0.7688679, g: 0.9075472, b: 1, a: 0}
+  - {r: 1, g: 0.9043336, b: 0.76862746, a: 0}
+  - {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 0}
+  - {r: 0, g: 0.20347473, b: 0.31132078, a: 0}
+  cloudSizes:
+  - 0.125
+  - 0.13
+  - 0.14
+  - 0.2
+  - 0.25
+  - 0.26
+  - 0.3
+  - 0.35
+  cloudSpeeds:
+  - 0.2
+  - 0.1
+  - 0.25
+  - 0.15
+  - 0.05
+  - 0.21
+  - 0.05
+  - 0.2
+  minCloudSizeMultiplier: 0.8
+  ObjectsOnTheSurface:
+  - {fileID: 919132149155446097, guid: 0128c6769e124514fa8ec061527055b6, type: 3}
+  - {fileID: 919132149155446097, guid: f1e150190d3cafa4cb5890c2745879f9, type: 3}
+  - {fileID: 919132149155446097, guid: 12abf100994347f4aa0cc52fd101ae68, type: 3}
+  - {fileID: 919132149155446097, guid: 2a43be34676aeda4cb6072fd4663e97d, type: 3}
+  - {fileID: 919132149155446097, guid: ab5adf8b81519154292fac8810e0bb3f, type: 3}
+  - {fileID: 919132149155446097, guid: 9aabd5d980fa3da42b7131073e1ba287, type: 3}
+  - {fileID: 919132149155446097, guid: 13e9ba1cdcb95284eb1a3cb0ce5c6d2d, type: 3}
+  - {fileID: 919132149155446097, guid: e39019ad05947f442acca664d22483d3, type: 3}
+  - {fileID: 919132149155446097, guid: a048356715062f045bf8fb64fe3806df, type: 3}
+  - {fileID: 919132149155446097, guid: 7fc9bd09e99c2e84183899cc789f010b, type: 3}
+  - {fileID: 919132149155446097, guid: c4bd39016339d2f459c23e9f7739a171, type: 3}
+  - {fileID: 919132149155446097, guid: 5863b0a8793e04f499af944f490972a1, type: 3}
+  - {fileID: 919132149155446097, guid: 018caee74b3122c48921238ad0045635, type: 3}
+  - {fileID: 919132149155446097, guid: 81cad48729fae254e95a8352734547af, type: 3}
+  - {fileID: 919132149155446097, guid: 8cacde83b3ca2084aaa52c3aa2f98b24, type: 3}
+  - {fileID: 919132149155446097, guid: 535affa91e333c142b726371a8c9e4d2, type: 3}
+  - {fileID: 919132149155446097, guid: fb4d215d3952d8f4abc98145f111cb36, type: 3}
+  objectScale: 0.25
+  objectCount: {x: 2, y: 6}
+  outlineColorStyle:
+    attacker: {r: 4, g: 0.54901963, b: 0, a: 0}
+    defender: {r: 0, g: 0.5803922, b: 4, a: 0}
+    add: {r: 0.8096957, g: 4, b: 0, a: 0}

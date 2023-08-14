@@ -1,18 +1,34 @@
 using ForceDirectedGraph.DataStructure;
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Planet : MonoBehaviour, INode
 {
     string id;
-    string[] neigbers;
-    int troopCount;
+
+    public int TroopCount
+    {
+        get
+        {
+            return troopCount;
+        }
+        set
+        {
+            troopCount = value;
+            UpdateUI();
+        }
+    }
+    int troopCount = 0;
+
+
     string troopOwner;
     bool towerEnable;
     bool isStrategic;
+
+    [SerializeField] Text troopCountIndicatorText;
+    [SerializeField] RectTransform canvasRootObject;
 
     PlanetStylizer stylizer;
 
@@ -23,12 +39,15 @@ public class Planet : MonoBehaviour, INode
     {
         OnPlanetCreated?.Invoke(this);
         stylizer = GetComponent<PlanetStylizer>();    
+        cam = Camera.main;
     }
 
+
+    Camera cam;
     // Update is called once per frame
     void Update()
     {
-
+        canvasRootObject.position = cam.WorldToScreenPoint(transform.position);
     }
 
     public override string ToString()
@@ -58,6 +77,12 @@ public class Planet : MonoBehaviour, INode
     {
         stylizer.SetOutline(1, mode);
     }
+
+    void UpdateUI()
+    {
+        troopCountIndicatorText.text = TroopCount.ToString();
+    }
+
 
     public void OnDeselect()
     {

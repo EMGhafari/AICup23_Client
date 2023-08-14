@@ -7,10 +7,14 @@ public class ActionManager : MonoBehaviour , IActionPerformer
 {
     [SerializeField][TextArea] string testJSON;
 
-    Queue<Actions.Action> actionStack;
+    List<Actions.Action> actionStack;
+    int stackIndex = 0;
+
     List<Planet> planets;
 
     [SerializeField] float gameSpeed = 1;
+
+    [SerializeField] ParticleSystem troopsAttackParticle;
 
 
     // Start is called before the first frame update
@@ -20,7 +24,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         LoadActions();
         if(actionStack != null)
         {
-            StartCoroutine(RunAction(actionStack.Dequeue()));
+            loopCoroutine = StartCoroutine(RunAction(actionStack[stackIndex]));
         }
         else
         {
@@ -30,24 +34,24 @@ public class ActionManager : MonoBehaviour , IActionPerformer
 
     void LoadActions()
     {
-        actionStack = new Queue<Actions.Action>();
+        actionStack = new List<Actions.Action>();
         LogUtility.Log loadedLog = LogUtility.Deserialize(testJSON);
         foreach(int[] move in loadedLog.initialize)
         {
-            actionStack.Enqueue(new Actions.Add(move[0], move[1]));
+            actionStack.Add(new Actions.Add(move[0], move[1]));
         }
         foreach(KeyValuePair<string,LogUtility.Turn> turn in loadedLog.turns)
         {
-            actionStack.Enqueue(new Actions.Update(turn.Value.nodes_owner, turn.Value.troop_count));
+            actionStack.Add(new Actions.Update(turn.Value.nodes_owner, turn.Value.troop_count));
             foreach (int[] add in turn.Value.add_troop)
             {
-                actionStack.Enqueue(new Actions.Add(add[0], add[1]));
+                actionStack.Add(new Actions.Add(add[0], add[1]));
             }
             foreach (LogUtility.Attack attack in turn.Value.attack)
             {
-                actionStack.Enqueue(new Actions.Attack(attack));
+                actionStack.Add(new Actions.Attack(attack));
             }
-            actionStack.Enqueue(new Actions.Fortify(turn.Value.fortify));
+            actionStack.Add(new Actions.Fortify(turn.Value.fortify));
         }
     }
 
@@ -71,14 +75,16 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     }
 
 
+    Coroutine loopCoroutine = null;
     IEnumerator RunAction(Actions.Action action)
     {
         yield return new WaitForSeconds(1 / gameSpeed);
         action.Perform(this);
+        stackIndex++;
         
-        if(actionStack != null && actionStack.Count > 0)
+        if(actionStack != null && stackIndex < actionStack.Count)
         {
-            StartCoroutine (RunAction(actionStack.Dequeue()));
+            loopCoroutine = StartCoroutine (RunAction(actionStack[stackIndex]));
         }
     }
 
@@ -113,6 +119,14 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         }
         planets[info.attacker].OnSelect(Planet.SelectionMode.attacker);
         planets[info.target].OnSelect(Planet.SelectionMode.defender);
+
+        Vector3 attachPos = planets[info.attacker].gameObject.transform.position;
+        Vector3 targetPos = planets[info.target].gameObject.transform.position;
+
+
+        Camera.main.GetComponent<CameraController>().SetTarget(attachPos, targetPos);
+
+        ParticleSystem troops = Instantiate(troopsAttackParticle, attachPos, Quaternion.LookRotation(targetPos - attachPos));
     }
 
     public void PerformAdd(int node, int amount)
@@ -122,6 +136,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
             planet.OnDeselect();
         }
         planets[node].OnSelect(Planet.SelectionMode.add);
+        //Camera.main.GetComponent<CameraController>().SetTarget(planets[node].gameObject.transform.position);
     }
 
     public void PerformFortify(LogUtility.Fortify info)
@@ -134,5 +149,15 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         {
             planets[i].OnSelect(Planet.SelectionMode.add);
         }
+        //Camera.main.GetComponent<CameraController>().SetTarget(planets[info.path[info.path.Length-1]].gameObject.transform.position);
+    }
+
+    public void SetPlayheadPos(int stackIndex)
+    {
+        if (actionStack == null || stackIndex >= actionStack.Count) return;
+        
+        StopCoroutine(loopCoroutine);
+        this.stackIndex = stackIndex;
+        loopCoroutine = StartCoroutine(RunAction(actionStack[stackIndex]));
     }
 }

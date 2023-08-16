@@ -30,6 +30,8 @@ namespace ForceDirectedGraph
             _FirstNode = firstNode;
             _SecondNode = secondNode;
 
+            /*
+
             // Set color
             LineRenderer.startColor = link.Color;
             LineRenderer.endColor = link.Color;
@@ -38,6 +40,8 @@ namespace ForceDirectedGraph
             float width = link.Width == 0 ? 0 : link.Width * 0.08f + 0.02f; // [0.02 -> 0.1]
             LineRenderer.startWidth = width;
             LineRenderer.endWidth = width;
+
+            */
         }
 
         #endregion
@@ -108,6 +112,5 @@ namespace ForceDirectedGraph
         }
 
         #endregion
-
     }
 }

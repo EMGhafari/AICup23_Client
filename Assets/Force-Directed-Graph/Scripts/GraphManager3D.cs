@@ -11,7 +11,6 @@ namespace ForceDirectedGraph
     {
         #region Constants
 
-
         /// <summary>
         /// The repulsion force between any two nodes.
         /// </summary>
@@ -20,7 +19,7 @@ namespace ForceDirectedGraph
         /// <summary>
         /// The maximum distance for applying repulsion forces.
         /// </summary>
-        private const float REPULSION_DISTANCE = 10f;
+        [SerializeField] private const float REPULSION_DISTANCE = 10f;
 
         /// <summary>
         /// The attraction force between any two nodes.
@@ -260,14 +259,14 @@ namespace ForceDirectedGraph
         private float ComputeDistance(GraphNode3D node1, GraphNode3D node2)
         {
             return (float)
-                Math.Sqrt
-                (
-                    Math.Pow(node1.transform.position.x - node2.transform.position.x, 2)
-                    +
-                    Math.Pow(node1.transform.position.y - node2.transform.position.y, 2)
-                    +
-                    Math.Pow(node1.transform.position.z - node2.transform.position.z, 2)
-                );
+            Math.Sqrt
+            (
+                Math.Pow(node1.transform.position.x - node2.transform.position.x, 2)
+                +
+                Math.Pow(node1.transform.position.y - node2.transform.position.y, 2)
+                +
+                Math.Pow(node1.transform.position.z - node2.transform.position.z, 2)
+            );
         }
 
         /// <summary>

@@ -1,3 +1,4 @@
+using Necromancy.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,11 +17,13 @@ public class ActionManager : MonoBehaviour , IActionPerformer
 
     [SerializeField] ParticleSystem troopsAttackParticle;
 
+    LineRenderer actionLine;
 
     // Start is called before the first frame update
     void Start()
     {
         planets = new List<Planet>();
+        actionLine = GetComponent<LineRenderer>();
         LoadActions();
         if(actionStack != null)
         {
@@ -64,7 +67,6 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         }
     }
 
-
     private void OnEnable()
     {
         Planet.OnPlanetCreated += AddPlanet;
@@ -73,7 +75,6 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     {
         Planet.OnPlanetCreated -= AddPlanet;
     }
-
 
     Coroutine loopCoroutine = null;
     IEnumerator RunAction(Actions.Action action)
@@ -87,7 +88,6 @@ public class ActionManager : MonoBehaviour , IActionPerformer
             loopCoroutine = StartCoroutine (RunAction(actionStack[stackIndex]));
         }
     }
-
 
     //For Debugging
     public void PrintPlanets()
@@ -109,6 +109,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         {
             planet.OnDeselect();
         }
+        ResetActionLine();
     }
 
     public void PerformAttack(LogUtility.Attack info)
@@ -123,10 +124,13 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         Vector3 attachPos = planets[info.attacker].gameObject.transform.position;
         Vector3 targetPos = planets[info.target].gameObject.transform.position;
 
+        Vector3 attackDir = (targetPos - attachPos).normalized;
+
 
         Camera.main.GetComponent<CameraController>().SetTarget(attachPos, targetPos);
 
-        ParticleSystem troops = Instantiate(troopsAttackParticle, attachPos, Quaternion.LookRotation(targetPos - attachPos));
+        ParticleSystem troops = Instantiate(troopsAttackParticle, attachPos + attackDir , Quaternion.LookRotation(attackDir));
+        SetActionLine(new Vector3[] {attachPos, targetPos}, Color.red);
     }
 
     public void PerformAdd(int node, int amount)
@@ -136,7 +140,9 @@ public class ActionManager : MonoBehaviour , IActionPerformer
             planet.OnDeselect();
         }
         planets[node].OnSelect(Planet.SelectionMode.add);
+        planets[node].SpawnText("+" + amount);
         //Camera.main.GetComponent<CameraController>().SetTarget(planets[node].gameObject.transform.position);
+        ResetActionLine();
     }
 
     public void PerformFortify(LogUtility.Fortify info)
@@ -150,6 +156,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
             planets[i].OnSelect(Planet.SelectionMode.add);
         }
         //Camera.main.GetComponent<CameraController>().SetTarget(planets[info.path[info.path.Length-1]].gameObject.transform.position);
+        ResetActionLine();
     }
 
     public void SetPlayheadPos(int stackIndex)
@@ -159,5 +166,16 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         StopCoroutine(loopCoroutine);
         this.stackIndex = stackIndex;
         loopCoroutine = StartCoroutine(RunAction(actionStack[stackIndex]));
+    }
+
+    void ResetActionLine()
+    {
+        actionLine.positionCount = 0;
+    }
+
+    void SetActionLine(Vector3[] positions, Color color = default)
+    {
+        actionLine.positionCount = positions.Length;
+        actionLine.SetPositions(positions);
     }
 }

@@ -153,6 +153,6 @@ public class CameraController : MonoBehaviour
         Vector3 dir1 = target2 - midpoint;
         Vector3 dir2 = Vector3.Cross(dir1, transform.up);
         Quaternion rot = Quaternion.LookRotation(-dir2, Vector3.Cross(dir2,dir1));
-        target = new PosRot(midpoint + dir2 * focusDistance * dir1.magnitude, rot);   
+        target = new PosRot(midpoint + dir2.normalized * focusDistance * dir1.magnitude, rot);   
     }
 }

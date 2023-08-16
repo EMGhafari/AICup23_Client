@@ -1,4 +1,5 @@
 using ForceDirectedGraph.DataStructure;
+using Necromancy.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,8 +23,9 @@ public class Planet : MonoBehaviour, INode
     }
     int troopCount = 0;
 
+    int owner;
 
-    string troopOwner;
+
     bool towerEnable;
     bool isStrategic;
 
@@ -34,11 +36,16 @@ public class Planet : MonoBehaviour, INode
 
     public static event PlanetDelegate OnPlanetCreated;
     public delegate void PlanetDelegate(Planet planet);
+
+
+    TextRendererParticleSystem UIparticle;
+
     // Start is called before the first frame update
     void Start()
     {
         OnPlanetCreated?.Invoke(this);
-        stylizer = GetComponent<PlanetStylizer>();    
+        stylizer = GetComponent<PlanetStylizer>();  
+        UIparticle = GetComponentInChildren<TextRendererParticleSystem>();
         cam = Camera.main;
     }
 
@@ -83,6 +90,11 @@ public class Planet : MonoBehaviour, INode
         troopCountIndicatorText.text = TroopCount.ToString();
     }
 
+
+    public void SpawnText(string text)
+    {
+        UIparticle.SpawnParticle(transform.position, text, Color.white);
+    }
 
     public void OnDeselect()
     {

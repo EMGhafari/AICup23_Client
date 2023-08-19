@@ -36,7 +36,7 @@ namespace Actions
 
         public override string ToString()
         {
-            return turnId + ": " + type.ToString();
+            return turnId + ": ";
         }
     }
 
@@ -48,7 +48,9 @@ namespace Actions
         public int new_troop_count_target;
         public int new_target_owner;
 
-        public Attack(LogUtility.Attack attack, int turnId = 0) : base(turnId) 
+
+        int[] owners;
+        public Attack(LogUtility.Attack attack, int[] owners , int turnId = 0) : base(turnId) 
         {
             type = Type.attack;
             durationMultiplyer = 1;
@@ -57,6 +59,7 @@ namespace Actions
             new_troop_count_attacker = attack.new_troop_count_attacker;
             new_troop_count_target = attack.new_troop_count_target;
             new_target_owner = attack.new_target_owner;
+            this.owners = owners;
         }
         public override void Perform(IActionPerformer performer)
         {
@@ -74,8 +77,8 @@ namespace Actions
 
         public override string ToString()
         {
-            string result = attacker == new_target_owner ? "Success" : "Failure";
-            string output = "Attacking from " + attacker + " to " + target + 
+            string result = owners[attacker] == new_target_owner ? "Success" : "Failure";
+            string output = base.ToString() + "Attacking from " + attacker + " to " + target + 
                 "\nResult: " + result + divider + "new attacker troops: " + new_troop_count_attacker
                 + divider + "new target troops: " + new_troop_count_target + divider + "target owner: " + new_target_owner;
             return output;
@@ -105,7 +108,7 @@ namespace Actions
         }
         public override string ToString()
         {
-            string output = "Fortifying " + number_of_troops + " troops" + divider + "Path: " + Utilities.ArrayToString(path);
+            string output = base.ToString() + "Fortifying " + number_of_troops + " troops" + divider + "Path: " + Utilities.ArrayToString(path);
             return output;
         }
     }
@@ -130,7 +133,7 @@ namespace Actions
         }
         public override string ToString()
         {
-            string output = "Adding " + amount + " troops to " + node;
+            string output = base.ToString() + "Adding " + amount + " troops to " + node;
             return output;
         }
     }
@@ -153,7 +156,7 @@ namespace Actions
         }
         public override string ToString()
         {
-            string output = "Updating...";
+            string output = base.ToString() + "Updating...";
             return output;
         }
     }

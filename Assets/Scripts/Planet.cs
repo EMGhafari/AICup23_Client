@@ -120,6 +120,12 @@ public class Planet : MonoBehaviour, INode
         this.styles = styles;
     }
 
+    public Color getPlanetColor()
+    {
+        return styles.GetStyle(owner).color;
+    }
+
+
     IEnumerator ShowID()
     {
         idIndicatorText.transform.parent.gameObject.SetActive(true);

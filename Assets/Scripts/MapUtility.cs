@@ -13,7 +13,8 @@ namespace Utilities
             public int number_of_nodes;
             public int number_of_edges;
             public int[][] list_of_edges;
-            public int[] special_node;
+            public int[] strategic_nodes;
+            public int[] scores_of_strategic_nodes;
         }
        
         public static Map Deserialize(string json)
@@ -26,7 +27,7 @@ namespace Utilities
             List<ForceDirectedGraph.DataStructure.Node> nodes = new List<ForceDirectedGraph.DataStructure.Node>();
             for (int i = 0; i < map.number_of_nodes; i++)
             {
-                ForceDirectedGraph.DataStructure.Node currentNode = new ForceDirectedGraph.DataStructure.Node(System.Guid.NewGuid(), i.ToString(), Color.black, map.special_node.Contains(i)? 2.5f:1);
+                ForceDirectedGraph.DataStructure.Node currentNode = new ForceDirectedGraph.DataStructure.Node(System.Guid.NewGuid(), i.ToString(), Color.black, map.strategic_nodes.Contains(i)? 2.2f:1);
                 nodes.Add(currentNode);
             }
             List<ForceDirectedGraph.DataStructure.Link> edges = new List<ForceDirectedGraph.DataStructure.Link>();

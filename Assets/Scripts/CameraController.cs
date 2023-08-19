@@ -154,7 +154,7 @@ public class CameraController : MonoBehaviour
 
     public void SetTarget(Vector3 target1, Vector3 target2)
     {
-        
+        /*
         locked = true;
         lockTime = Time.time;
         Vector3 midpoint = (target1 + target2) / 2;
@@ -162,6 +162,6 @@ public class CameraController : MonoBehaviour
         Vector3 dir2 = Vector3.Cross(dir1, transform.up);
         Quaternion rot = Quaternion.LookRotation(-dir2, Vector3.Cross(dir2,dir1));
         target = new PosRot(midpoint + dir2.normalized * focusDistance * dir1.magnitude, rot);  
-        
+        */
     }
 }

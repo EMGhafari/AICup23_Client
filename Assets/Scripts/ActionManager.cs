@@ -13,22 +13,12 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     List<Planet> planets;
 
     [SerializeField] float gameSpeed = 1;
-
-
-    [SerializeField] ParticleSystem troopsAttackParticle;
-
-    
-    
-    LineRenderer actionLine;
-
-    
-    
     [SerializeField] float coolDownTime = 5;
 
-    
-    
+    [Header("Visuals")]
+    [SerializeField] ParticleSystem troopsAttackParticle;
+    LineRenderer actionLine;    
     [SerializeField] PlayerStyles playerStyles;
-
 
 
     [Header("UI references")]
@@ -47,7 +37,9 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     {
         int turnID = 0;
         actionStack = new List<Actions.Action>();
-        LogUtility.Log loadedLog = LogUtility.Deserialize(GameManager.Instance.getLog());
+
+        string logJson = GameManager.Instance == null ? testJSON : GameManager.Instance.getLog();
+        LogUtility.Log loadedLog = LogUtility.Deserialize(logJson);
         foreach(int[] move in loadedLog.initialize)
         {
             actionStack.Add(new Actions.Add(move[1], 1, move[0], turnID++));
@@ -61,7 +53,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
             }
             foreach (LogUtility.Attack attack in turn.Value.attack)
             {
-                actionStack.Add(new Actions.Attack(attack, turnID));
+                actionStack.Add(new Actions.Attack(attack, turn.Value.nodes_owner , turnID));
             }
             if(turn.Value.fortify.number_of_troops != 0) actionStack.Add(new Actions.Fortify(turn.Value.fortify, turnID));
             turnID++;
@@ -81,8 +73,9 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     IEnumerator StartFirstPlayback()
     {
         Time.timeScale = 10;
-        yield return new WaitForSecondsRealtime(coolDownTime);
+        yield return new WaitForSecondsRealtime(3);
         Time.timeScale = 1;
+        yield return new WaitForSeconds(coolDownTime);
         if (actionStack != null)
         {
             loopCoroutine = StartCoroutine(RunAction(actionStack[0]));
@@ -138,7 +131,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         Camera.main.GetComponent<CameraController>().SetTarget(attachPos, targetPos);
 
         ParticleSystem troops = Instantiate(troopsAttackParticle, attachPos + attackDir , Quaternion.LookRotation(attackDir));
-        SetActionLine(new Vector3[] {attachPos, targetPos}, Color.red);
+        SetActionLine(new Vector3[] {attachPos, targetPos}, planets[info.attacker].getPlanetColor(), planets[info.target].getPlanetColor());
     }
 
     public void PerformAdd(int node, int amount, int? owner = null)
@@ -187,10 +180,12 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         actionLine.positionCount = 0;
     }
 
-    void SetActionLine(Vector3[] positions, Color color = default)
+    void SetActionLine(Vector3[] positions, Color color1 = default, Color color2 = default)
     {
         actionLine.positionCount = positions.Length;
         actionLine.SetPositions(positions);
+        actionLine.startColor = color1;
+        actionLine.endColor = color2;
     }
 
     public struct TurnInfo

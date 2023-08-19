@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 
-public class MapTesrt : MonoBehaviour
+public class MapMaker : MonoBehaviour
 {
     private enum MapMode
     {
@@ -26,7 +26,9 @@ public class MapTesrt : MonoBehaviour
 
     void CreateMap()
     {
-        MapUtility.Map map = MapUtility.Deserialize(GameManager.Instance.getMap());
+
+        string mapJson = GameManager.Instance == null ? testJson : GameManager.Instance.getMap();
+        MapUtility.Map map = MapUtility.Deserialize(mapJson);
 
         switch (mode)
         {

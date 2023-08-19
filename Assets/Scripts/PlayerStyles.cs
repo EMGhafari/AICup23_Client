@@ -8,14 +8,16 @@ public class PlayerStyles : ScriptableObject
     [SerializeField] Texture2D[] AvatarsToChoose;
     [SerializeField][ColorUsage(false, true)] Color[] ColorsToChoose;
 
-    List<PlayerStyleReference> playerStyles = new List<PlayerStyleReference>();
-
+    [SerializeField] List<PlayerStyleReference> playerStyles = new List<PlayerStyleReference>();
+    
+    [System.Serializable]
     public struct PlayerStyleReference
     {
         public int avatarIndex;
         public int colorIndex;
     }
 
+    [System.Serializable]
     public struct PlayerStyle
     {
         public PlayerStyle(Texture2D avatarTex, Color color)
@@ -35,7 +37,6 @@ public class PlayerStyles : ScriptableObject
     {
         return new PlayerStyle(AvatarsToChoose[reference.avatarIndex], ColorsToChoose[reference.colorIndex]);
     }
-
 
     public void AddStyle(PlayerStyleReference reference)
     {

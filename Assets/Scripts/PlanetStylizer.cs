@@ -52,21 +52,10 @@ public class PlanetStylizer : MonoBehaviour
     }
 
 
-    public void SetOutline(int value, Planet.SelectionMode mode)
+    public void SetOutline(int value, PlayerStyles.PlayerStyle player)
     {
         Color color = Color.white;
-        switch (mode)
-        {
-            case Planet.SelectionMode.attacker:
-                color = styleSheet.outlineColorStyle.attacker;
-                break;
-            case Planet.SelectionMode.defender:
-                color = styleSheet.outlineColorStyle.defender;
-                break;
-            case Planet.SelectionMode.add:
-                color = styleSheet.outlineColorStyle.add;
-                break;
-        }
+        color = player.color;
         OutlineBlock.SetFloat("_Enabled", value);
         OutlineBlock.SetColor("_Color", color);
         if (meshRenderer.sharedMaterials.Length > 2) meshRenderer.SetPropertyBlock(OutlineBlock, 2);

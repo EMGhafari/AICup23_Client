@@ -1,5 +1,4 @@
 using ForceDirectedGraph.DataStructure;
-using Necromancy.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,23 +12,26 @@ public class Planet : MonoBehaviour, INode
     {
         get
         {
-            return troopCount;
+            return _TroopCount;
         }
         set
         {
-            troopCount = value;
+            _TroopCount = value;
             UpdateUI();
         }
     }
-    int troopCount = 0;
-
-    int owner;
+    int _TroopCount = 0;
+    int owner = -1;
 
 
     bool towerEnable;
     bool isStrategic;
 
+
+    [Header("UI")]
     [SerializeField] Text troopCountIndicatorText;
+    [SerializeField] Text idIndicatorText;
+    [SerializeField] float popUpLifetime = 1f;
     [SerializeField] RectTransform canvasRootObject;
 
     PlanetStylizer stylizer;
@@ -38,14 +40,13 @@ public class Planet : MonoBehaviour, INode
     public delegate void PlanetDelegate(Planet planet);
 
 
-    TextRendererParticleSystem UIparticle;
-
+    TextRendererParticleSystemSimple UIparticle;
     // Start is called before the first frame update
     void Start()
     {
         OnPlanetCreated?.Invoke(this);
         stylizer = GetComponent<PlanetStylizer>();  
-        UIparticle = GetComponentInChildren<TextRendererParticleSystem>();
+        UIparticle = GetComponentInChildren<TextRendererParticleSystemSimple>();
         cam = Camera.main;
     }
 
@@ -54,7 +55,14 @@ public class Planet : MonoBehaviour, INode
     // Update is called once per frame
     void Update()
     {
-        canvasRootObject.position = cam.WorldToScreenPoint(transform.position);
+        if (GetComponent<Renderer>().isVisible)
+        {
+            canvasRootObject.gameObject.SetActive(true);
+            canvasRootObject.position = cam.WorldToScreenPoint(transform.position);
+        } else
+        {
+            canvasRootObject.gameObject.SetActive(false);
+        }
     }
 
     public override string ToString()
@@ -72,7 +80,6 @@ public class Planet : MonoBehaviour, INode
         this.id = id;
     }
 
-
     public enum SelectionMode
     {
         attacker,
@@ -80,9 +87,10 @@ public class Planet : MonoBehaviour, INode
         add
     }
 
-    public void OnSelect(SelectionMode mode)
+    public void OnSelect()
     {
-        stylizer.SetOutline(1, mode);
+        if (owner < 0) return;
+        stylizer.SetOutline(1, styles.GetStyle(owner));
     }
 
     void UpdateUI()
@@ -90,14 +98,33 @@ public class Planet : MonoBehaviour, INode
         troopCountIndicatorText.text = TroopCount.ToString();
     }
 
-
     public void SpawnText(string text)
     {
-        UIparticle.SpawnParticle(transform.position, text, Color.white);
+        UIparticle.SpawnParticle(transform.position, text, owner >= 0? Color.Lerp(styles.GetStyle(owner).color,Color.white,0.5f) : Color.white);
     }
 
     public void OnDeselect()
     {
         stylizer.SetOutline(0);
+    }
+
+    private void OnMouseDown()
+    {
+        StartCoroutine(ShowID());
+    }
+
+    PlayerStyles styles;
+    public void SetOwner(int index, PlayerStyles styles)
+    {
+        owner = index;
+        this.styles = styles;
+    }
+
+    IEnumerator ShowID()
+    {
+        idIndicatorText.transform.parent.gameObject.SetActive(true);
+        idIndicatorText.text = id;
+        yield return new WaitForSeconds(popUpLifetime);
+        idIndicatorText.transform.parent.gameObject.SetActive(false);
     }
 }

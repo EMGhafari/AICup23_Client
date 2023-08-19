@@ -9,7 +9,7 @@ public interface IActionPerformer
 
     void PerformAttack(LogUtility.Attack info);
 
-    void PerformAdd(int node, int amount);
+    void PerformAdd(int node, int amount, int? owner = null);
 
     void PerformFortify(LogUtility.Fortify info);
 }

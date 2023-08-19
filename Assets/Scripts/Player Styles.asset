@@ -12,5 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aff9f9384be10046ba1b9a450ae894a, type: 3}
   m_Name: Player Styles
   m_EditorClassIdentifier: 
-  AvatarsToChoose: []
-  ColorsToChoose: []
+  AvatarsToChoose:
+  - {fileID: 2800000, guid: 53a298af80867394d9d3ec93cf6dbe68, type: 3}
+  ColorsToChoose:
+  - {r: 2, g: 0, b: 0, a: 0}
+  - {r: 0, g: 2, b: 0, a: 0}
+  - {r: 0, g: 0, b: 2, a: 0}
+  playerStyles:
+  - avatarIndex: 0
+    colorIndex: 0
+  - avatarIndex: 0
+    colorIndex: 1
+  - avatarIndex: 0
+    colorIndex: 2

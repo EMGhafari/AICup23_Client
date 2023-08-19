@@ -23,6 +23,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] float focusSpeed = 1f;
     [SerializeField] float focusDistance = 10f;
     [SerializeField] float zoomSpeed = 1f;
+    [SerializeField] Vector2 fovRange = new Vector2(30, 100);
 
     [Space(20)]
     [Header("Boundries")]
@@ -85,8 +86,11 @@ public class CameraController : MonoBehaviour
         float x = Input.GetAxis("Mouse X");
         float y = -Input.GetAxis("Mouse Y");
 
-        transform.Rotate(Vector3.right, y * Time.deltaTime * sensitivity * 45);
-        transform.Rotate(Vector3.up, x * Time.deltaTime * sensitivity * 45);
+
+        float slowDown = Input.GetKey(KeyCode.Space) ? 0.1f : 1;
+
+        transform.Rotate(Vector3.right, y * Time.deltaTime * sensitivity * 45 * slowDown);
+        transform.Rotate(Vector3.up, x * Time.deltaTime * sensitivity * 45 * slowDown);
     }
 
 
@@ -95,10 +99,12 @@ public class CameraController : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
-        bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        bool shift = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && !Input.GetKey(KeyCode.Space);
+
+        float slowDown = Input.GetKey(KeyCode.Space) ? 0.1f : 1;
 
         transform.Translate((Vector3.forward * y * (y>0 ? forwardSpeed: backwardSpeed)
-            + Vector3.right * x * strafeSpeed) * Time.deltaTime * (shift?shiftMultiplier:1));
+            + Vector3.right * x * strafeSpeed) * Time.deltaTime * (shift?shiftMultiplier:1) * slowDown);
     }
 
 
@@ -116,6 +122,7 @@ public class CameraController : MonoBehaviour
     {
         float s = Input.GetAxis("Mouse ScrollWheel");
         cam.fieldOfView -= s * Time.deltaTime * zoomSpeed;
+        cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, fovRange.x, fovRange.y);
     }
 
 
@@ -147,12 +154,14 @@ public class CameraController : MonoBehaviour
 
     public void SetTarget(Vector3 target1, Vector3 target2)
     {
+        
         locked = true;
         lockTime = Time.time;
         Vector3 midpoint = (target1 + target2) / 2;
         Vector3 dir1 = target2 - midpoint;
         Vector3 dir2 = Vector3.Cross(dir1, transform.up);
         Quaternion rot = Quaternion.LookRotation(-dir2, Vector3.Cross(dir2,dir1));
-        target = new PosRot(midpoint + dir2.normalized * focusDistance * dir1.magnitude, rot);   
+        target = new PosRot(midpoint + dir2.normalized * focusDistance * dir1.magnitude, rot);  
+        
     }
 }

@@ -1,4 +1,3 @@
-using Necromancy.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +14,25 @@ public class ActionManager : MonoBehaviour , IActionPerformer
 
     [SerializeField] float gameSpeed = 1;
 
+
     [SerializeField] ParticleSystem troopsAttackParticle;
 
+    
+    
     LineRenderer actionLine;
+
+    
+    
+    [SerializeField] float coolDownTime = 5;
+
+    
+    
+    [SerializeField] PlayerStyles playerStyles;
+
+
+
+    [Header("UI references")]
+    [SerializeField] ConsoleUI consoleUI;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +40,52 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         planets = new List<Planet>();
         actionLine = GetComponent<LineRenderer>();
         LoadActions();
-        if(actionStack != null)
+        StartCoroutine(StartFirstPlayback());
+    }
+
+    void LoadActions()
+    {
+        int turnID = 0;
+        actionStack = new List<Actions.Action>();
+        LogUtility.Log loadedLog = LogUtility.Deserialize(GameManager.Instance.getLog());
+        foreach(int[] move in loadedLog.initialize)
         {
-            loopCoroutine = StartCoroutine(RunAction(actionStack[stackIndex]));
+            actionStack.Add(new Actions.Add(move[1], 1, move[0], turnID++));
+        }
+        foreach (KeyValuePair<string,LogUtility.Turn> turn in loadedLog.turns)
+        {
+            actionStack.Add(new Actions.Update(turn.Value.nodes_owner, turn.Value.troop_count, turnID));
+            foreach (int[] add in turn.Value.add_troop)
+            {
+                actionStack.Add(new Actions.Add(add[0], add[1], turnId: turnID));
+            }
+            foreach (LogUtility.Attack attack in turn.Value.attack)
+            {
+                actionStack.Add(new Actions.Attack(attack, turnID));
+            }
+            if(turn.Value.fortify.number_of_troops != 0) actionStack.Add(new Actions.Fortify(turn.Value.fortify, turnID));
+            turnID++;
+        }
+    }
+
+    private void OnEnable()
+    {
+        Planet.OnPlanetCreated += RegisterPlanet;
+    }
+    void OnDisable()
+    {
+        Planet.OnPlanetCreated -= RegisterPlanet;
+    }
+
+    Coroutine loopCoroutine = null;
+    IEnumerator StartFirstPlayback()
+    {
+        Time.timeScale = 10;
+        yield return new WaitForSecondsRealtime(coolDownTime);
+        Time.timeScale = 1;
+        if (actionStack != null)
+        {
+            loopCoroutine = StartCoroutine(RunAction(actionStack[0]));
         }
         else
         {
@@ -35,52 +93,11 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         }
     }
 
-    void LoadActions()
-    {
-        actionStack = new List<Actions.Action>();
-        LogUtility.Log loadedLog = LogUtility.Deserialize(testJSON);
-        foreach(int[] move in loadedLog.initialize)
-        {
-            actionStack.Add(new Actions.Add(move[0], move[1]));
-        }
-        foreach(KeyValuePair<string,LogUtility.Turn> turn in loadedLog.turns)
-        {
-            actionStack.Add(new Actions.Update(turn.Value.nodes_owner, turn.Value.troop_count));
-            foreach (int[] add in turn.Value.add_troop)
-            {
-                actionStack.Add(new Actions.Add(add[0], add[1]));
-            }
-            foreach (LogUtility.Attack attack in turn.Value.attack)
-            {
-                actionStack.Add(new Actions.Attack(attack));
-            }
-            actionStack.Add(new Actions.Fortify(turn.Value.fortify));
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //PrintPlanets();
-        }
-    }
-
-    private void OnEnable()
-    {
-        Planet.OnPlanetCreated += AddPlanet;
-    }
-    void OnDisable()
-    {
-        Planet.OnPlanetCreated -= AddPlanet;
-    }
-
-    Coroutine loopCoroutine = null;
     IEnumerator RunAction(Actions.Action action)
     {
-        yield return new WaitForSeconds(1 / gameSpeed);
         action.Perform(this);
+        consoleUI.AddLogEntry(action.ToString());
+        yield return new WaitForSeconds ((1 / gameSpeed) * action.durationMultiplyer);
         stackIndex++;
         
         if(actionStack != null && stackIndex < actionStack.Count)
@@ -89,16 +106,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         }
     }
 
-    //For Debugging
-    public void PrintPlanets()
-    {
-        foreach (Planet planet in planets)
-        {
-            Debug.Log(planet.getID() + "\n");
-        }
-    }
-
-    public void AddPlanet(Planet planet)
+    public void RegisterPlanet(Planet planet)
     {
         planets.Add(planet);
     }
@@ -118,14 +126,14 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         {
             planet.OnDeselect();
         }
-        planets[info.attacker].OnSelect(Planet.SelectionMode.attacker);
-        planets[info.target].OnSelect(Planet.SelectionMode.defender);
+        planets[info.attacker].OnSelect();
+        planets[info.target].OnSelect();
+
 
         Vector3 attachPos = planets[info.attacker].gameObject.transform.position;
         Vector3 targetPos = planets[info.target].gameObject.transform.position;
 
         Vector3 attackDir = (targetPos - attachPos).normalized;
-
 
         Camera.main.GetComponent<CameraController>().SetTarget(attachPos, targetPos);
 
@@ -133,13 +141,14 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         SetActionLine(new Vector3[] {attachPos, targetPos}, Color.red);
     }
 
-    public void PerformAdd(int node, int amount)
+    public void PerformAdd(int node, int amount, int? owner = null)
     {
         foreach(Planet planet in planets)
         {
             planet.OnDeselect();
         }
-        planets[node].OnSelect(Planet.SelectionMode.add);
+        if (owner != null) planets[node].SetOwner(owner??-1, playerStyles);
+        planets[node].OnSelect();
         planets[node].SpawnText("+" + amount);
         //Camera.main.GetComponent<CameraController>().SetTarget(planets[node].gameObject.transform.position);
         ResetActionLine();
@@ -153,7 +162,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         }
         foreach (int i in info.path)
         {
-            planets[i].OnSelect(Planet.SelectionMode.add);
+            planets[i].OnSelect();
         }
         //Camera.main.GetComponent<CameraController>().SetTarget(planets[info.path[info.path.Length-1]].gameObject.transform.position);
         ResetActionLine();
@@ -168,6 +177,11 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         loopCoroutine = StartCoroutine(RunAction(actionStack[stackIndex]));
     }
 
+    public void Pause()
+    {
+        StopCoroutine(loopCoroutine);
+    }
+
     void ResetActionLine()
     {
         actionLine.positionCount = 0;
@@ -177,5 +191,19 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     {
         actionLine.positionCount = positions.Length;
         actionLine.SetPositions(positions);
+    }
+
+    public struct TurnInfo
+    {
+        public int number;
+        public TurnInfo(int num)
+        {
+            number = num;
+        }
+    }
+    public TurnInfo getTurnInfo()
+    {
+        int turnNum = actionStack[stackIndex].turnId;
+        return new TurnInfo(turnNum);
     }
 }

@@ -19,30 +19,41 @@ public class FileDialog : MonoBehaviour
         //actionManager = jsonHandlerSource.GetComponent<ActionManager>();
     }
 
-    public void openFileDialog()
+    public void OpenMap()
     {
-        filePath = StandaloneFileBrowser.OpenFilePanel("choose json file", "",new[] { new ExtensionFilter("Game Log", "txt", "json") }, false);
+        filePath = StandaloneFileBrowser.OpenFilePanel("choose json file", "", new[] { new ExtensionFilter("Game Log", "txt", "json") }, false);
 
         if (filePath != null)
-        { 
+        {
+            string f = "";
+            readContent(filePath[0], ref f);
+            GameManager.Instance.setMap(f);
+        }
+    }
+   
 
-            readContent(filePath[0]);
-            //setContent();
-        }       
+    public void OpenLog()
+    {
+        filePath = StandaloneFileBrowser.OpenFilePanel("choose json file", "", new[] { new ExtensionFilter("Game Log", "txt", "json") }, false);
 
+        if (filePath != null)
+        {
+            string f = "";
+            readContent(filePath[0], ref f);
+            GameManager.Instance.setLog(f);
+        }
     }
 
-
-    private void readContent(string _filePath)
+    private void readContent(string _filePath, ref string content)
     {
         using (StreamReader reader = new StreamReader(_filePath))
         {
-            fileContent = reader.ReadToEnd();
+            content = reader.ReadToEnd();
 
             reader.Close();
         }
 
-        Debug.Log(fileContent);
+        Debug.Log(content);
     }
 
     //private void setContent()

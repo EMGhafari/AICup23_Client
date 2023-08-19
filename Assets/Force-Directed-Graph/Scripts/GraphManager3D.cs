@@ -14,17 +14,17 @@ namespace ForceDirectedGraph
         /// <summary>
         /// The repulsion force between any two nodes.
         /// </summary>
-        private const float REPULSION_FORCE = 40000f;
+        private const float REPULSION_FORCE = 50000f;
 
         /// <summary>
         /// The maximum distance for applying repulsion forces.
         /// </summary>
-        [SerializeField] private const float REPULSION_DISTANCE = 10f;
+        [SerializeField] private const float REPULSION_DISTANCE = 12f;
 
         /// <summary>
         /// The attraction force between any two nodes.
         /// </summary>
-        private const float ATTRACTION_FORCE = 40000f;
+        private const float ATTRACTION_FORCE = 50000f;
 
         #endregion
 
@@ -154,6 +154,7 @@ namespace ForceDirectedGraph
                 GameObject graphNode = Instantiate(NoteTemplate, NodesParent.transform);
                 graphNode.transform.position = Vector3.zero;
                 graphNode.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                graphNode.transform.localScale = Vector3.one * node.Size;
 
                 // Extract the script
                 GraphNode3D script = graphNode.GetComponent<GraphNode3D>();

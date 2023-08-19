@@ -22,7 +22,7 @@ namespace ForceDirectedGraph.DataStructure
         /// </summary>
         /// <param name="name">The displayed name of the node.</param>
         public Node(string name)
-            : this(Guid.NewGuid(), name, Color.white)
+            : this(Guid.NewGuid(), name, Color.white, 1)
         {
         }
 
@@ -32,11 +32,12 @@ namespace ForceDirectedGraph.DataStructure
         /// <param name="name">The displayed name of the node.</param>
         /// <param name="color">The color used when representing the node.</param>
         /// </summary>
-        public Node(Guid id, string name, Color color)
+        public Node(Guid id, string name, Color color, float size)
         {
             _Id = id;
             _Name = name;
             _Color = color;
+            _Size = size;
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace ForceDirectedGraph.DataStructure
         /// </summary>
         /// <param name="node">Instance to clone.</param>
         public Node(Node node)
-            : this(node.Id, node.Name, node.Color)
+            : this(node.Id, node.Name, node.Color, node.Size)
         {
         }
 
@@ -65,6 +66,10 @@ namespace ForceDirectedGraph.DataStructure
         public Guid Id { get { return _Id; } }
 
 
+
+
+        private float _Size;
+        public float Size { get { return _Size;  } }
 
         /// <summary>
         /// The displayed name of the node.

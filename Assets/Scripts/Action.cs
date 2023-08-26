@@ -10,29 +10,31 @@ namespace Actions
     [System.Serializable]
     public abstract class Action
     {
+        public int[] owners;
+        public int[] counts;
+
+        public Action(int turnId, int[] owners, int[] counts)
+        {
+            this.turnId = turnId;
+            this.owners = (int[])owners.Clone();
+            this.counts = (int[])counts.Clone();
+        }
+
         public enum Type
         {
             attack,
             fortify,
             add,
-            update,
-        }
-
-        public Action(int turnId = 0)
-        {
-            this.turnId = turnId;
+            //update,
         }
 
         public int turnId;
-
         public float durationMultiplyer;
-
         public Type type;
+        protected const string divider = "\t\t";
+
 
         public abstract void Perform(IActionPerformer performer);
-
-
-        protected const string divider = " || ";
 
         public override string ToString()
         {
@@ -49,8 +51,7 @@ namespace Actions
         public int new_target_owner;
 
 
-        int[] owners;
-        public Attack(LogUtility.Attack attack, int[] owners , int turnId = 0) : base(turnId) 
+        public Attack(LogUtility.Attack attack , int turnId, int[] owners, int[] counts) : base(turnId, owners, counts) 
         {
             type = Type.attack;
             durationMultiplyer = 1;
@@ -59,18 +60,16 @@ namespace Actions
             new_troop_count_attacker = attack.new_troop_count_attacker;
             new_troop_count_target = attack.new_troop_count_target;
             new_target_owner = attack.new_target_owner;
-            this.owners = owners;
         }
         public override void Perform(IActionPerformer performer)
         {
-            Debug.Log ("Attacking from " + attacker + " to " + target);
             LogUtility.Attack info = new LogUtility.Attack
             {
                 attacker = attacker,
                 target = target,
                 new_target_owner = new_target_owner,
                 new_troop_count_attacker = new_troop_count_attacker,
-                new_troop_count_target = new_target_owner,
+                new_troop_count_target = new_troop_count_target,
             };
             performer.PerformAttack(info);
         }
@@ -79,7 +78,7 @@ namespace Actions
         {
             string result = owners[attacker] == new_target_owner ? "Success" : "Failure";
             string output = base.ToString() + "Attacking from " + attacker + " to " + target + 
-                "\nResult: " + result + divider + "new attacker troops: " + new_troop_count_attacker
+                "\nResult: " + result +  divider + "New attacker troops: " + new_troop_count_attacker
                 + divider + "new target troops: " + new_troop_count_target + divider + "target owner: " + new_target_owner;
             return output;
         }
@@ -89,7 +88,8 @@ namespace Actions
     {
         public int number_of_troops;
         public int[] path;
-        public Fortify(LogUtility.Fortify fortify, int turnId = 0) : base(turnId)
+        public Fortify(LogUtility.Fortify fortify, int turnId, int[] owners, int[] counts)
+            : base(turnId, owners, counts)
         {
             type = Type.fortify;
             durationMultiplyer = 0.75f;
@@ -98,7 +98,6 @@ namespace Actions
         }
         public override void Perform(IActionPerformer performer)
         {
-            Debug.Log("Fortifying " + number_of_troops + " troops");
             LogUtility.Fortify info = new LogUtility.Fortify
             {
                 path = path,
@@ -115,7 +114,8 @@ namespace Actions
 
     public class Add:Action
     {
-        public Add(int node, int amount, int? owner = null, int turnId = 0) : base(turnId)
+        public Add(int node, int amount, int turnId, int[] owners, int[] counts, int? owner = null)
+            : base(turnId, owners, counts)
         {
             type = Type.add;
             durationMultiplyer = 0.2f;
@@ -128,7 +128,6 @@ namespace Actions
         public int? owner;
         public override void Perform(IActionPerformer performer)
         {
-            Debug.Log("Adding " +  amount + " soldiers to " +  node);
             performer.PerformAdd(node, amount, owner);
         }
         public override string ToString()
@@ -138,6 +137,7 @@ namespace Actions
         }
     }
 
+    /*
     public class Update : Action
     {
         public int[] nodes_owner;
@@ -151,7 +151,6 @@ namespace Actions
         }
         public override void Perform(IActionPerformer performer)
         {
-            Debug.Log("Updating...");
             performer.PerformUpdate(nodes_owner, troop_count);
         }
         public override string ToString()
@@ -160,8 +159,7 @@ namespace Actions
             return output;
         }
     }
-
-
+    */
     public static class Utilities
     {
         public static string ArrayToString<T>(T[] array)
@@ -174,6 +172,23 @@ namespace Actions
             }
             result += "]";
             return result;
+        }
+
+        public static void UpdateMapInfo(int[] owners, int[] counts, Attack action)
+        {
+            counts[action.attacker] = action.new_troop_count_attacker;
+            counts[action.target] = action.new_troop_count_target;
+            owners[action.target] = action.new_target_owner;
+        }
+        public static void UpdateMapInfo(int[] owners, int[] counts, Add action)
+        {
+            if(action.owner != null) { owners[action.node] = action.owner??-1; }
+            counts[action.node] += action.amount;
+        }
+        public static void UpdateMapInfo(int[] owners, int[] counts, Fortify action)
+        {
+            counts[action.path[0]] -= action.number_of_troops;
+            counts[action.path[action.path.Length - 1]] += action.number_of_troops;
         }
     }
 }

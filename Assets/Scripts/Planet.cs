@@ -1,13 +1,13 @@
 using ForceDirectedGraph.DataStructure;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Planet : MonoBehaviour, INode
 {
     string id;
-
     public int TroopCount
     {
         get
@@ -24,8 +24,22 @@ public class Planet : MonoBehaviour, INode
     int owner = -1;
 
 
-    bool towerEnable;
+    bool IsFort { 
+        get
+        {
+            return _IsFort;
+        }
+        set
+        {
+            _IsFort = value;
+            shield.gameObject.SetActive(value);
+            shield.startColor = styles.GetStyle(owner).color;
+        }
+    }
+    bool _IsFort = false;
     bool isStrategic;
+
+    [SerializeField] ParticleSystem shield;
 
 
     [Header("UI")]
@@ -33,6 +47,12 @@ public class Planet : MonoBehaviour, INode
     [SerializeField] Text idIndicatorText;
     [SerializeField] float popUpLifetime = 1f;
     [SerializeField] RectTransform canvasRootObject;
+
+
+    [Header("Player Styles")]
+    [SerializeField] PlayerStyles styles;
+
+
 
     PlanetStylizer stylizer;
 
@@ -70,12 +90,12 @@ public class Planet : MonoBehaviour, INode
         return id;
     }
 
-    public string getID()
+    public string GetID()
     {
         return (id);
     }
 
-    public void setID(string id)
+    public void SetID(string id)
     {
         this.id = id;
     }
@@ -89,13 +109,18 @@ public class Planet : MonoBehaviour, INode
 
     public void OnSelect()
     {
-        if (owner < 0) return;
+        if (owner < 0)
+        {
+            stylizer.SetOutline(0);
+            return;
+        }
         stylizer.SetOutline(1, styles.GetStyle(owner));
     }
 
     void UpdateUI()
     {
         troopCountIndicatorText.text = TroopCount.ToString();
+        troopCountIndicatorText.color = owner >= 0? styles.GetStyle(owner).color : new Color(0,0,0,0);
     }
 
     public void SpawnText(string text)
@@ -113,18 +138,20 @@ public class Planet : MonoBehaviour, INode
         StartCoroutine(ShowID());
     }
 
-    PlayerStyles styles;
-    public void SetOwner(int index, PlayerStyles styles)
+    public void SetOwner(int index)
     {
         owner = index;
-        this.styles = styles;
     }
 
-    public Color getPlanetColor()
+    public int GetOwner()
+    {
+        return owner;
+    }
+
+    public Color GetPlanetColor()
     {
         return styles.GetStyle(owner).color;
     }
-
 
     IEnumerator ShowID()
     {
@@ -133,4 +160,5 @@ public class Planet : MonoBehaviour, INode
         yield return new WaitForSeconds(popUpLifetime);
         idIndicatorText.transform.parent.gameObject.SetActive(false);
     }
+
 }

@@ -15,9 +15,10 @@ MonoBehaviour:
   AvatarsToChoose:
   - {fileID: 2800000, guid: 53a298af80867394d9d3ec93cf6dbe68, type: 3}
   ColorsToChoose:
-  - {r: 2, g: 0, b: 0, a: 0}
-  - {r: 0, g: 2, b: 0, a: 0}
-  - {r: 0, g: 0, b: 2, a: 0}
+  - {r: 2, g: 0, b: 0, a: 1}
+  - {r: 0, g: 2, b: 0, a: 1}
+  - {r: 0, g: 0, b: 2, a: 1}
+  - {r: 1.7349316, g: 2, b: 0, a: 1}
   playerStyles:
   - avatarIndex: 0
     colorIndex: 0
@@ -25,3 +26,5 @@ MonoBehaviour:
     colorIndex: 1
   - avatarIndex: 0
     colorIndex: 2
+  - avatarIndex: 0
+    colorIndex: 3

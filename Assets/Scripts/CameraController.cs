@@ -8,6 +8,11 @@ public class CameraController : MonoBehaviour
 {
     Camera cam;
 
+    [Header("MasterSetting")]
+    [SerializeField] CameraSettings settings;
+
+
+    [Space(20)]
     [Header("Movement")]
     [SerializeField] float strafeSpeed = 1f;
     [SerializeField] float forwardSpeed = 1f;
@@ -33,6 +38,7 @@ public class CameraController : MonoBehaviour
 
     float lockTime;
     bool locked = false;
+    bool autoLock = false;
     Vector3 velocity;
     float angleVelocity;
 
@@ -54,6 +60,28 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
+        LoadFromSettings(this.settings);
+    }
+
+
+    private void OnEnable()
+    {
+        settings.OnSettingChange += LoadFromSettings;
+    }
+
+    private void OnDisable()
+    {
+        settings.OnSettingChange -= LoadFromSettings;
+    }
+
+
+    public void LoadFromSettings(CameraSettings settings)
+    {
+        forwardSpeed = settings.MovementSpeed;
+        strafeSpeed = settings.MovementSpeed;
+        backwardSpeed = settings.MovementSpeed;
+        autoLock = settings.AutoFocus;
+        sensitivity = settings.Sensitiviy;
     }
 
     // Update is called once per frame
@@ -72,7 +100,7 @@ public class CameraController : MonoBehaviour
             HandlePosition();
             HandleRotation();
             HandleZoom();
-            HandleOffView();
+            //HandleOffView();
         } else
         {
             focus();
@@ -86,27 +114,25 @@ public class CameraController : MonoBehaviour
         float x = Input.GetAxis("Mouse X");
         float y = -Input.GetAxis("Mouse Y");
 
-
         float slowDown = Input.GetKey(KeyCode.Space) ? 0.1f : 1;
 
-        transform.Rotate(Vector3.right, y * Time.deltaTime * sensitivity * 45 * slowDown);
-        transform.Rotate(Vector3.up, x * Time.deltaTime * sensitivity * 45 * slowDown);
+        transform.Rotate(Vector3.right, y * Time.unscaledDeltaTime * sensitivity * 100 * slowDown);
+        transform.Rotate(Vector3.up, x * Time.unscaledDeltaTime * sensitivity * 100 * slowDown);
     }
-
 
     void HandlePosition()
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
 
         bool shift = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && !Input.GetKey(KeyCode.Space);
 
         float slowDown = Input.GetKey(KeyCode.Space) ? 0.1f : 1;
 
         transform.Translate((Vector3.forward * y * (y>0 ? forwardSpeed: backwardSpeed)
-            + Vector3.right * x * strafeSpeed) * Time.deltaTime * (shift?shiftMultiplier:1) * slowDown);
-    }
+            + Vector3.right * x * strafeSpeed) * Time.unscaledDeltaTime * (shift?shiftMultiplier:1) * slowDown);
 
+    }
 
     void focus()
     {
@@ -121,7 +147,7 @@ public class CameraController : MonoBehaviour
     void HandleZoom()
     {
         float s = Input.GetAxis("Mouse ScrollWheel");
-        cam.fieldOfView -= s * Time.deltaTime * zoomSpeed;
+        cam.fieldOfView -= s * Time.unscaledDeltaTime * zoomSpeed;
         cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, fovRange.x, fovRange.y);
     }
 
@@ -154,7 +180,8 @@ public class CameraController : MonoBehaviour
 
     public void SetTarget(Vector3 target1, Vector3 target2)
     {
-        /*
+        if (!autoLock) return;
+
         locked = true;
         lockTime = Time.time;
         Vector3 midpoint = (target1 + target2) / 2;
@@ -162,6 +189,5 @@ public class CameraController : MonoBehaviour
         Vector3 dir2 = Vector3.Cross(dir1, transform.up);
         Quaternion rot = Quaternion.LookRotation(-dir2, Vector3.Cross(dir2,dir1));
         target = new PosRot(midpoint + dir2.normalized * focusDistance * dir1.magnitude, rot);  
-        */
     }
 }

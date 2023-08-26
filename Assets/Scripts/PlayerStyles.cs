@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerStyles : ScriptableObject
 {
     [SerializeField] Texture2D[] AvatarsToChoose;
-    [SerializeField][ColorUsage(false, true)] Color[] ColorsToChoose;
+    [SerializeField][ColorUsage(true, true)] Color[] ColorsToChoose;
 
     [SerializeField] List<PlayerStyleReference> playerStyles = new List<PlayerStyleReference>();
     

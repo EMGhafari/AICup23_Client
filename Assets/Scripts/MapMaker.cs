@@ -26,7 +26,6 @@ public class MapMaker : MonoBehaviour
 
     void CreateMap()
     {
-
         string mapJson = GameManager.Instance == null ? testJson : GameManager.Instance.getMap();
         MapUtility.Map map = MapUtility.Deserialize(mapJson);
 

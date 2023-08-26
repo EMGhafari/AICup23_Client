@@ -161,7 +161,7 @@ namespace ForceDirectedGraph
 
                 // Initialize data
                 script.Initialize(node);
-                graphNode.GetComponent<INode>().setID(node.Name);
+                graphNode.GetComponent<INode>().SetID(node.Name);
 
 
                 // Add to list

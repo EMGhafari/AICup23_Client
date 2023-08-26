@@ -126,12 +126,12 @@ namespace ForceDirectedGraph.DataStructure
             return Name;
         }
 
-        public string getID()
+        public string GetID()
         {
             return "0";
         }
 
-        public void setID(string id)
+        public void SetID(string id)
         {
             
         }
@@ -141,8 +141,8 @@ namespace ForceDirectedGraph.DataStructure
     }
 
     public interface INode{
-        public string getID();
-        public void setID(string id);
+        public string GetID();
+        public void SetID(string id);
     }
 
 

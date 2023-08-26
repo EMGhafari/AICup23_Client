@@ -147,6 +147,6 @@ MonoBehaviour:
   objectScale: 0.25
   objectCount: {x: 2, y: 6}
   outlineColorStyle:
-    attacker: {r: 1.4980392, g: 0.21176471, b: 0, a: 0}
-    defender: {r: 0, g: 0.21960784, b: 1.4980392, a: 0}
-    add: {r: 0.30588236, g: 1.4980392, b: 0, a: 0}
+    attacker: {r: 1.4980392, g: 0.21176471, b: 0, a: 1}
+    defender: {r: 0, g: 0.21960784, b: 1.4980392, a: 1}
+    add: {r: 0.30588236, g: 1.4980392, b: 0, a: 1}

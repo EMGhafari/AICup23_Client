@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -96,12 +97,7 @@ public class UIMANAGER : MonoBehaviour
         masker.SetActive(false);
         CurrentAction_Dis.text = "0";
         Play_Pause = true;
-        Master_Volume.value = audioSettings.MasterVolume;
-        Music_Volume.value = audioSettings.MusicVolume;
-        SFX_Volume.value = audioSettings.SFXVolume;
-        Mouse_Sens.value = cameraSettings.Sensitiviy;
-        Movment_speed.value = cameraSettings.MovementSpeed;
-        Autozoom = cameraSettings.AutoFocus;
+        LoadSettings();
     }
 
     public void Initialize(PlayerStyles styles, ActionManager manager, int actionCount , int playerCount = 3)
@@ -121,6 +117,17 @@ public class UIMANAGER : MonoBehaviour
             Troops_Dis[i].text = 0.ToString();
         }
     }
+
+    void LoadSettings()
+    {
+        Master_Volume.value = audioSettings.MasterVolume;
+        Music_Volume.value = audioSettings.MusicVolume;
+        SFX_Volume.value = audioSettings.SFXVolume;
+        Mouse_Sens.value = cameraSettings.Sensitiviy;
+        Movment_speed.value = cameraSettings.MovementSpeed;
+        Autozoom = cameraSettings.AutoFocus;
+    }
+
 
     public void autozoom_f()
     {
@@ -306,7 +313,6 @@ public class UIMANAGER : MonoBehaviour
         audioSettings.SFXVolume = value;
     }
 
-
     public void mouse_sens_slider(float value)
     {
         Mouse_Sens_text.text = value.ToString("0.0");
@@ -346,10 +352,15 @@ public class UIMANAGER : MonoBehaviour
         audioSettings.OnSettingChange += OnAudioSettingChange;
     }
 
+    private void OnDisable()
+    {
+        audioSettings.OnSettingChange -= OnAudioSettingChange;
+    }
+
     public void OnAudioSettingChange(AudioSettings settings)
     {
         masterMixer.SetFloat("MasterVolume", Mathf.Lerp(-40,10, settings.MasterVolume / 100));
-        masterMixer.SetFloat("MusicVolume", Mathf.Lerp(-40, 10, settings.MusicVolume / 100));
-        masterMixer.SetFloat("SFXVolume", Mathf.Lerp(-40, 10, settings.SFXVolume / 100));
+        masterMixer.SetFloat("MusicVolume",  Mathf.Lerp(-40, 10, settings.MusicVolume / 100));
+        masterMixer.SetFloat("SFXVolume",    Mathf.Lerp(-40, 10, settings.SFXVolume / 100));
     }
 }

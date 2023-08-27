@@ -154,7 +154,7 @@ namespace ForceDirectedGraph
                 GameObject graphNode = Instantiate(NoteTemplate, NodesParent.transform);
                 graphNode.transform.position = Vector3.zero;
                 graphNode.transform.localRotation = Quaternion.Euler(Vector3.zero);
-                graphNode.transform.localScale = Vector3.one * node.Size;
+                graphNode.transform.localScale = Vector3.one * (node.Size > 1 ? 2.2f : 1);
 
                 // Extract the script
                 GraphNode3D script = graphNode.GetComponent<GraphNode3D>();
@@ -162,7 +162,7 @@ namespace ForceDirectedGraph
                 // Initialize data
                 script.Initialize(node);
                 graphNode.GetComponent<INode>().SetID(node.Name);
-
+                graphNode.GetComponent<INode>().SetValue((int)node.Size);
 
                 // Add to list
                 GraphNodes?.Add(node.Id, script);

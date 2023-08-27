@@ -1,7 +1,6 @@
 using ForceDirectedGraph.DataStructure;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +23,8 @@ public class Planet : MonoBehaviour, INode
     int owner = -1;
 
 
+    int value = 0;
+
     bool IsFort { 
         get
         {
@@ -33,7 +34,7 @@ public class Planet : MonoBehaviour, INode
         {
             _IsFort = value;
             shield.gameObject.SetActive(value);
-            shield.startColor = styles.GetStyle(owner).color;
+            shield.startColor =  owner >= 0 ? styles.GetStyle(owner).color : Color.white;
         }
     }
     bool _IsFort = false;
@@ -45,8 +46,10 @@ public class Planet : MonoBehaviour, INode
     [Header("UI")]
     [SerializeField] Text troopCountIndicatorText;
     [SerializeField] Text idIndicatorText;
-    [SerializeField] float popUpLifetime = 1f;
     [SerializeField] RectTransform canvasRootObject;
+    [SerializeField] GameObject starIcon;
+    [SerializeField] Text valueIndicatorText;
+    [SerializeField] float popUpLifetime = 1f;
 
 
     [Header("Player Styles")]
@@ -69,7 +72,6 @@ public class Planet : MonoBehaviour, INode
         UIparticle = GetComponentInChildren<TextRendererParticleSystemSimple>();
         cam = Camera.main;
     }
-
 
     Camera cam;
     // Update is called once per frame
@@ -109,12 +111,8 @@ public class Planet : MonoBehaviour, INode
 
     public void OnSelect()
     {
-        if (owner < 0)
-        {
-            stylizer.SetOutline(0);
-            return;
-        }
-        stylizer.SetOutline(1, styles.GetStyle(owner));
+        if (owner < 0) return;
+        stylizer.SetOutline(1,styles.GetStyle(owner));
     }
 
     void UpdateUI()
@@ -150,15 +148,32 @@ public class Planet : MonoBehaviour, INode
 
     public Color GetPlanetColor()
     {
-        return styles.GetStyle(owner).color;
+        return owner >= 0 ? styles.GetStyle(owner).color : Color.white;
     }
 
     IEnumerator ShowID()
     {
         idIndicatorText.transform.parent.gameObject.SetActive(true);
         idIndicatorText.text = id;
+        
+        if(value > 1)
+        {
+            valueIndicatorText.gameObject.SetActive(true);
+            starIcon.SetActive(true);
+            valueIndicatorText.text = "(" + value.ToString() + ")";
+        }
+
         yield return new WaitForSeconds(popUpLifetime);
         idIndicatorText.transform.parent.gameObject.SetActive(false);
     }
 
+    public int GetValue()
+    {
+        return value;
+    }
+
+    public void SetValue(int value)
+    {
+        this.value = value;
+    }
 }

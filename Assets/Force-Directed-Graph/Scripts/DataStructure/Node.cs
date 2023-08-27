@@ -136,6 +136,16 @@ namespace ForceDirectedGraph.DataStructure
             
         }
 
+        public int GetValue()
+        {
+            return (int)Size;
+        }
+
+        public void SetValue(int value)
+        {
+
+        }
+
         #endregion
 
     }
@@ -143,7 +153,9 @@ namespace ForceDirectedGraph.DataStructure
     public interface INode{
         public string GetID();
         public void SetID(string id);
+
+        public int GetValue();
+
+        public void SetValue(int value);
     }
-
-
 }

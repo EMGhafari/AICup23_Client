@@ -77,7 +77,8 @@ public class ActionManager : MonoBehaviour , IActionPerformer
             turn.Value.troop_count.CopyTo(counts,0);
             foreach (int[] add in turn.Value.add_troop)
             {
-                Actions.Add action = new Actions.Add(add[0], add[1], turnID, owners, counts);
+                int? owner = owners[add[0]] == -1 ? turnID % 3 : null;
+                Actions.Add action = new Actions.Add(add[0], add[1], turnID, owners, counts, owner);
                 actionStack.Add(action);
                 Actions.Utilities.UpdateMapInfo(owners, counts, action);
             }
@@ -246,6 +247,17 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         Time.timeScale = 1;
     }
 
+
+    public void ForwardButton()
+    {
+        SetPlayheadPos(stackIndex + 1);
+    }
+
+    public void BackwardButton()
+    {
+        SetPlayheadPos(stackIndex + 1);
+    }
+
     void SetActionLine(Vector3[] positions, Color color1 = default, Color color2 = default)
     {
         actionLine.positionCount = positions.Length;
@@ -312,7 +324,6 @@ public class ActionManager : MonoBehaviour , IActionPerformer
 
         mainUI.UpdateScoreBoard(currentTurn, playerPlanets, playerTroops);
     }
-
 
     public struct TurnInfo
     {

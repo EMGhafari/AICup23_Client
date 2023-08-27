@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UIMANAGER : MonoBehaviour
 {
@@ -25,6 +27,7 @@ public class UIMANAGER : MonoBehaviour
     public TextMeshProUGUI[] Names_Dis;
     public TextMeshProUGUI[] PlanetNumber_Dis;
     public TextMeshProUGUI[] Troops_Dis;
+    public TextMeshProUGUI TurnNumber;
 
     [Header("Video Player")]
     public TextMeshProUGUI TotalActions_Dis;
@@ -37,6 +40,7 @@ public class UIMANAGER : MonoBehaviour
     [Header("Setting")]
     public CameraSettings cameraSettings;
     public AudioSettings audioSettings;
+    public AudioMixer masterMixer;
     [Space(10)]
     public GameObject setting;
 
@@ -61,18 +65,28 @@ public class UIMANAGER : MonoBehaviour
     [Header("Actions")]
     [SerializeField] private GameObject Attack_eventUI;
     [SerializeField] private GameObject AddTroops_eventUI;
+    [SerializeField] private GameObject Fortify_eventUI;
 
     public GameObject attack_display;
     public GameObject addtroops_display;
+    public GameObject fortify_display;
+
     public TextMeshProUGUI Attacker_name;
     public TextMeshProUGUI Defender_name;
     public TextMeshProUGUI Attacker_Troops;
     public TextMeshProUGUI Defender_Troops;
-
+    [Header("Add")]
     //{add troops}
     public TextMeshProUGUI addtoopsint;
     public TextMeshProUGUI playeradding;
     public TextMeshProUGUI Planetadding;
+    [Header("Fortify")]
+    public TextMeshProUGUI playerFortifying;
+    public TextMeshProUGUI FortifyFrom;
+    public TextMeshProUGUI FortifyTo;
+    public TextMeshProUGUI FortifyAmount;
+
+
 
 
     ActionManager actionManager;
@@ -200,12 +214,51 @@ public class UIMANAGER : MonoBehaviour
         }
     }
 
+    public void FORTIFYManager(bool isFortifying, int incharge, int troops, int from, int to)
+    {
+        RESETACTIONManager();
+
+        playerFortifying.text = "Player " + incharge;
+        FortifyAmount.text = troops.ToString();
+        FortifyFrom.text = from.ToString();
+        FortifyTo.text = to.ToString();
+
+
+        playerFortifying.color = styles.GetStyle(incharge).color;
+        FortifyAmount.color = styles.GetStyle(incharge).color;
+        FortifyFrom.color = styles.GetStyle(incharge).color;
+        FortifyTo.color = styles.GetStyle(incharge).color;
+
+        if (isFortifying)
+        {
+            fortify_display.SetActive(true);
+            Fortify_eventUI.SetActive(true);
+        }
+        else
+        {
+            fortify_display.SetActive(false);
+            Fortify_eventUI.SetActive(false);
+        }
+    }
+
     void RESETACTIONManager()
     {
         addtroops_display.SetActive(false);
         AddTroops_eventUI.SetActive(false);
         attack_display.SetActive(false);
         Attack_eventUI.SetActive(false);
+    }
+
+
+
+    public void UpdateScoreBoard(int turn, int[] planets,int[] troops)
+    {
+        TurnNumber.text = turn.ToString();
+        for (int i = 0; i < PlanetNumber_Dis.Length; i++)
+        {
+            PlanetNumber_Dis[i].text = planets[i].ToString();
+            Troops_Dis[i].text = troops[i].ToString();
+        }
     }
 
     //////////////////////////////////
@@ -226,6 +279,7 @@ public class UIMANAGER : MonoBehaviour
     public void UpdateSliderValue(int value)
     {
         MainSlider.SetValueWithoutNotify(value);
+        CurrentAction_Dis.text = value.ToString();
     }
 
 
@@ -239,14 +293,17 @@ public class UIMANAGER : MonoBehaviour
     public void master_slider(float value)
     {
         Master_Volume_text.text = value.ToString();
+        audioSettings.MasterVolume = value;
     }
     public void music_slider(float value)
     {
         Music_Volume_text.text = value.ToString();
+        audioSettings.MusicVolume = value;
     }
     public void sfx_slider(float value)
     {
         SFX_Volume_text.text = value.ToString();
+        audioSettings.SFXVolume = value;
     }
 
 
@@ -282,5 +339,17 @@ public class UIMANAGER : MonoBehaviour
     public void Backward()
     {
         GetComponent<UIMANAGER>().MainSlider.value--;
+    }
+
+    private void OnEnable()
+    {
+        audioSettings.OnSettingChange += OnAudioSettingChange;
+    }
+
+    public void OnAudioSettingChange(AudioSettings settings)
+    {
+        masterMixer.SetFloat("MasterVolume", Mathf.Lerp(-40,10, settings.MasterVolume / 100));
+        masterMixer.SetFloat("MusicVolume", Mathf.Lerp(-40, 10, settings.MusicVolume / 100));
+        masterMixer.SetFloat("SFXVolume", Mathf.Lerp(-40, 10, settings.SFXVolume / 100));
     }
 }

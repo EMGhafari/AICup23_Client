@@ -37,6 +37,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         StartCoroutine(StartFirstPlayback());
     }
 
+    /*
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
@@ -47,6 +48,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
             }
         }
     }
+    */
 
     void LoadActions()
     {
@@ -115,9 +117,10 @@ public class ActionManager : MonoBehaviour , IActionPerformer
 
     IEnumerator RunAction(Actions.Action action)
     {
-        UpdateMapData(action.owners, action.counts);
-        action.Perform(this);
         currentTurn = action.turnId;
+        UpdateMapData(action.owners, action.counts);
+        UpdateScoreboard(stackIndex);
+        action.Perform(this);
         consoleUI.AddLogEntry(action.ToString());
         mainUI.UpdateSliderValue(stackIndex);
         yield return new WaitForSeconds ((1 / gameSpeed) * action.durationMultiplyer * 2);
@@ -216,6 +219,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         }
         planets[info.path[0]].TroopCount -= info.number_of_troops;
         planets[info.path.Length - 1].TroopCount += info.number_of_troops;
+        mainUI.FORTIFYManager(true, planets[info.path[0]].GetOwner(), info.number_of_troops, info.path[0], info.path[info.path.Length - 1]);
         ResetActionLine();
     }
 
@@ -295,6 +299,20 @@ public class ActionManager : MonoBehaviour , IActionPerformer
                 break;
         }
     }
+    public void UpdateScoreboard(int index)
+    {
+        int[] playerPlanets = new int[4];
+        int[] playerTroops = new int[4];
+        for (int i = 0; i < actionStack[index].owners.Length; i++)
+        {
+            if (actionStack[index].owners[i] < 0) continue;
+            playerPlanets[actionStack[index].owners[i]]++;
+            playerTroops[actionStack[index].owners[i]] += actionStack[index].counts[i];
+        }
+
+        mainUI.UpdateScoreBoard(currentTurn, playerPlanets, playerTroops);
+    }
+
 
     public struct TurnInfo
     {

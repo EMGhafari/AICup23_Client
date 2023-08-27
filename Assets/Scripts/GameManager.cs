@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    string logContent;
-    string mapContent;
+    [SerializeField] Text debug;
+    string logContent = "";
+    string mapContent = "";
 
     private void Awake()
     {
@@ -32,7 +34,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-
     public string getLog()
     {
         return logContent;
@@ -51,9 +52,25 @@ public class GameManager : MonoBehaviour
         mapContent = map;   
     }
 
-
     public bool readyToPlay()
     {
         return mapContent.Length > 0 && logContent.Length > 0;
+    }
+
+    public void Debug(string text, float time)
+    {
+        StartCoroutine(RenderDebug(text, time));
+    }
+
+    IEnumerator RenderDebug(string text, float time)
+    {
+        debug.text = text;
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime / time;
+            debug.color = Color.Lerp(new Color(1,1,1,1), new Color(1,1,1,0), t);
+            yield return null;
+        }
     }
 }

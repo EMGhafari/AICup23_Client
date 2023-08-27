@@ -17,13 +17,14 @@ public class MenuUI : MonoBehaviour
         
     }
 
-
-
     public void OnPlayGame()
     {
         if (GameManager.Instance.readyToPlay())
         {
             SceneManager.LoadScene(1);
+        } else
+        {
+            GameManager.Instance.Debug("Invalid map or log",3);
         }
     }
 }

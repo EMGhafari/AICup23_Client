@@ -6,41 +6,38 @@ using SFB;
 
 public class FileDialog : MonoBehaviour
 {
-
-    public string fileContent { get; private set; }
-    private string[] filePath;
-
-    //GameObject jsonHandlerSource;
-    //ActionManager actionManager;
-
-    void Start()
-    {
-        //jsonHandlerSource = GameObject.Find("Main Camera");
-        //actionManager = jsonHandlerSource.GetComponent<ActionManager>();
-    }
+    //public string fileContent { get; private set; }
+    //private string[] filePath;
 
     public void OpenMap()
     {
-        filePath = StandaloneFileBrowser.OpenFilePanel("choose json file", "", new[] { new ExtensionFilter("Game Log", "txt", "json") }, false);
+        string[] filePath = StandaloneFileBrowser.OpenFilePanel("choose json file", "", new[] { new ExtensionFilter("Map Log", "txt", "json") }, false);
 
         if (filePath != null)
         {
             string f = "";
             readContent(filePath[0], ref f);
             GameManager.Instance.setMap(f);
+        } else
+        {
+            GameManager.Instance.Debug("Invalid file or path", 3);
         }
     }
    
 
     public void OpenLog()
     {
-        filePath = StandaloneFileBrowser.OpenFilePanel("choose json file", "", new[] { new ExtensionFilter("Game Log", "txt", "json") }, false);
+        string[] filePath = StandaloneFileBrowser.OpenFilePanel("choose json file", "", new[] { new ExtensionFilter("Game Log", "txt", "json") }, false);
 
         if (filePath != null)
         {
             string f = "";
             readContent(filePath[0], ref f);
             GameManager.Instance.setLog(f);
+        }
+        else
+        {
+            GameManager.Instance.Debug("Invalid file or path", 3);
         }
     }
 
@@ -55,9 +52,4 @@ public class FileDialog : MonoBehaviour
 
         Debug.Log(content);
     }
-
-    //private void setContent()
-    //{
-    //    actionManager.testJSON = fileContent;
-    //}
 }

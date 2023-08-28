@@ -866,6 +866,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 9189961154605044705}
     m_Modifications:
     - target: {fileID: 6907576978742708104, guid: 300e583fdb7f74e2d939f819db5055a4, type: 3}
+      propertyPath: useUnscaledTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907576978742708104, guid: 300e583fdb7f74e2d939f819db5055a4, type: 3}
       propertyPath: ShapeModule.type
       value: 0
       objectReference: {fileID: 0}

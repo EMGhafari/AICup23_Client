@@ -156,7 +156,7 @@ public class Planet : MonoBehaviour, INode
         idIndicatorText.transform.parent.gameObject.SetActive(true);
         idIndicatorText.text = id;
         
-        if(value > 1)
+        if(value > 0)
         {
             valueIndicatorText.gameObject.SetActive(true);
             starIcon.SetActive(true);

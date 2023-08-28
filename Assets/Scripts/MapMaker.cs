@@ -17,14 +17,8 @@ public class MapMaker : MonoBehaviour
     [SerializeField][TextArea] string testJson;
     [SerializeField] GraphManager3D graphManager;
     [SerializeField] GraphManager graphManager2D;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        CreateMap();
-    }
-
-    void CreateMap()
+  
+    public int CreateMap()
     {
         string mapJson = GameManager.Instance == null ? testJson : GameManager.Instance.getMap();
         MapUtility.Map map = MapUtility.Deserialize(mapJson);
@@ -38,5 +32,7 @@ public class MapMaker : MonoBehaviour
                 graphManager.Initialize(MapUtility.ConvertToGraph(map));
                 break;
         }
+
+        return map.number_of_nodes;
     }
 }

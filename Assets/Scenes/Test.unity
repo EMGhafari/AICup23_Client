@@ -6064,6 +6064,16 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1171051044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5998562013396600661, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
+  m_PrefabInstance: {fileID: 1429530690}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1177723702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5998562014332064841, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
+  m_PrefabInstance: {fileID: 1429530690}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1283000841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6339,6 +6349,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5998562013396600667, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998562014332064846, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998562015069359906, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
+      propertyPath: autozoom_On
+      value: 
+      objectReference: {fileID: 1177723702}
+    - target: {fileID: 5998562015069359906, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
+      propertyPath: autozoom_Off
+      value: 
+      objectReference: {fileID: 1171051044}
     - target: {fileID: 5998562015069359907, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7223,19 +7249,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  testJson: "{\r\n    \"number_of_nodes\": 42,\r\n    \"number_of_edges\": 81,\r\n   
+  testJson: "{\r\n    \"number_of_nodes\": 42,\r\n    \"number_of_edges\": 82,\r\n   
     \"list_of_edges\": [[0, 1], [0, 2], [1, 2], [1, 3], [2, 3], [3, 4], [4, 5], [4,
     6], [5, 6], [5, 8], [5, 7], [5, 14], [5, 13], [6, 7], [6, 21], [7, 21], [7, 15],
     [7, 14], [8, 13], [8, 11], [8, 10], [9, 8], [9, 10], [10, 12], [10, 11], [10,
     36], [11, 12], [11, 13], [12, 13], [13, 14], [14, 15], [15, 21], [15, 20], [15,
     18], [15, 16], [16, 18], [16, 17], [16, 41], [17, 41], [17, 19], [17, 18], [18,
     19], [18, 20], [19, 20], [19, 27], [20, 21], [20, 22], [21, 22], [21, 23], [22,
-    23], [22, 27], [23, 24], [23, 26], [23, 27], [24, 25], [25, 26], [26, 27], [27,
-    28], [28, 29], [28, 30], [28, 31], [29, 30], [30, 31], [31, 32], [32, 33], [32,
-    34], [33, 34], [33, 38], [33, 39], [34, 35], [34, 38], [35, 38], [35, 37], [35,
-    36], [36, 37], [37, 38], [37, 40], [38, 39], [38, 40], [39, 40], [40, 41]],\r\n   
-    \"strategic_nodes\": [38, 28, 26, 18, 13, 1],\r\n    \"scores_of_strategic_nodes\"
-    : [5, 2, 3, 5, 7, 2]\r\n}"
+    23], [22, 27], [23, 24], [23, 25], [23, 26], [23, 27], [24, 25], [25, 26], [26,
+    27], [27, 28], [28, 29], [28, 30], [28, 31], [29, 30], [30, 31], [31, 32], [32,
+    33], [32, 34], [33, 34], [33, 38], [33, 39], [34, 35], [34, 38], [35, 38], [35,
+    37], [35, 36], [36, 37], [37, 38], [37, 40], [38, 39], [38, 40], [39, 40], [40,
+    41]],\r\n    \"strategic_nodes\": [29, 3, 7, 4, 20, 40],\r\n    \"scores_of_strategic_nodes\"
+    : [1, 2, 5, 1, 3, 3]\r\n}\r\n"
   graphManager: {fileID: 1538290166}
   graphManager2D: {fileID: 0}
 --- !u!114 &1907631580
@@ -7694,545 +7720,263 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1413005956}
     - target: {fileID: 1867234881832925049, guid: 8201c22c2e81dd44f9a5854a588d0e07, type: 3}
+      propertyPath: mapMaker
+      value: 
+      objectReference: {fileID: 1907631579}
+    - target: {fileID: 1867234881832925049, guid: 8201c22c2e81dd44f9a5854a588d0e07, type: 3}
       propertyPath: testJSON
-      value: "{\r\n  \"initialize\": [\r\n    [1, 13],\r\n    [2, 18],\r\n    [0,
-        38],\r\n    [1, 26],\r\n    [2, 1],\r\n    [0, 28],\r\n    [1, 5],\r\n   
-        [2, 8],\r\n    [0, 11],\r\n    [1, 12],\r\n    [2, 14],\r\n    [0, 15],\r\n   
-        [1, 16],\r\n    [2, 17],\r\n    [0, 19],\r\n    [1, 20],\r\n    [2, 33],\r\n   
-        [0, 34],\r\n    [1, 35],\r\n    [2, 37],\r\n    [0, 39],\r\n    [1, 40],\r\n   
-        [2, 23],\r\n    [0, 25],\r\n    [1, 27],\r\n    [2, 0],\r\n    [0, 2],\r\n   
-        [1, 3],\r\n    [2, 29],\r\n    [0, 30],\r\n    [1, 31],\r\n    [2, 8],\r\n   
-        [0, 30],\r\n    [1, 31],\r\n    [2, 18],\r\n    [0, 30],\r\n    [1, 20],\r\n   
-        [2, 29],\r\n    [0, 39],\r\n    [1, 40],\r\n    [2, 14],\r\n    [0, 30],\r\n   
-        [1, 16],\r\n    [2, 14],\r\n    [0, 15],\r\n    [1, 16],\r\n    [2, 17],\r\n   
-        [0, 11],\r\n    [1, 35],\r\n    [2, 17],\r\n    [0, 19],\r\n    [1, 40],\r\n   
-        [2, 18],\r\n    [0, 34],\r\n    [1, 3],\r\n    [2, 17],\r\n    [0, 34],\r\n   
-        [1, 35],\r\n    [2, 18],\r\n    [0, 15],\r\n    [1, 31],\r\n    [2, 17],\r\n   
-        [0, 19],\r\n    [1, 31],\r\n    [2, 18],\r\n    [0, 25],\r\n    [1, 26],\r\n   
-        [2, 8],\r\n    [0, 11],\r\n    [1, 13],\r\n    [2, 0],\r\n    [0, 34],\r\n   
-        [1, 13],\r\n    [2, 18],\r\n    [0, 28],\r\n    [1, 13],\r\n    [2, 29],\r\n   
-        [0, 19],\r\n    [1, 27],\r\n    [2, 0],\r\n    [0, 38],\r\n    [1, 12],\r\n   
-        [2, 8],\r\n    [0, 38],\r\n    [1, 27],\r\n    [2, 14],\r\n    [0, 15],\r\n   
-        [1, 35],\r\n    [2, 23],\r\n    [0, 25]\r\n  ],\r\n  \"turns\": {\r\n   
-        \"turn91\": {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 1, -1, 1, -1,
-        -1, 2, -1, -1, 0, 1, 1, 2, 0, 1, 2, 2, 0, 1, -1,\r\n        -1, 2, -1, 0,
-        1, 1, 0, 2, 0, 1, -1, 2, 0, 1, -1, 2, 0, 0, 1, -1\r\n      ],\r\n      \"troop_count\":
-        [\r\n        3, 1, 1, 2, 0, 1, 0, 0, 4, 0, 0, 3, 2, 4, 4, 4, 3, 5, 6, 4,
-        2, 0, 0, 2,\r\n        0, 3, 2, 3, 2, 3, 4, 4, 0, 1, 4, 4, 0, 1, 3, 2, 3,
-        0\r\n      ],\r\n      \"add_troop\": [\r\n        [2, 1],\r\n        [6,
-        1],\r\n        [7, 1],\r\n        [9, 1],\r\n        [10, 1],\r\n       
-        [21, 1],\r\n        [22, 1],\r\n        [24, 1],\r\n        [32, 1],\r\n       
-        [3, 1]\r\n      ],\r\n      \"attack\": [],\r\n      \"fortify\": {}\r\n   
-        },\r\n    \"turn92\": {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 1,
-        1, 1, 1, 1, 2, 1, 1, 0, 1, 1, 2, 0, 1, 2, 2, 0, 1, 1, 1, 2,\r\n        1,
-        0, 1, 1, 0, 2, 0, 1, 1, 2, 0, 1, -1, 2, 0, 0, 1, -1\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 1, 1, 3, 1, 1, 1, 1, 4, 1, 1, 3, 2, 4, 4,
-        4, 3, 5, 6, 4, 2, 1, 1, 2,\r\n        1, 3, 2, 3, 2, 3, 4, 4, 1, 1, 4, 4,
-        0, 1, 3, 2, 3, 0\r\n      ],\r\n      \"add_troop\": [\r\n        [36, 1],\r\n       
-        [41, 1],\r\n        [14, 5]\r\n      ],\r\n      \"attack\": [\r\n       
-        {\r\n          \"attacker\": 14,\r\n          \"target\": 5,\r\n         
-        \"new_troop_count_attacker\": 1,\r\n          \"new_troop_count_target\":
-        8,\r\n          \"new_target_owner\": 2\r\n        }\r\n      ],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn93\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 0, 1, 1, 2, 1, 1, 2, 1, 1, 0, 1, 1, 2, 0, 1, 2, 2, 0,
-        1, 1, 1, 2,\r\n        1, 0, 1, 1, 0, 2, 0, 1, 1, 2, 0, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 1, 1, 3, 1, 8, 1,
-        1, 4, 1, 1, 3, 2, 4, 1, 4, 3, 5, 6, 4, 2, 1, 1, 2,\r\n        1, 3, 2, 3,
-        2, 3, 4, 4, 1, 1, 4, 4, 1, 1, 3, 2, 3, 1\r\n      ],\r\n      \"add_troop\":
-        [[30, 7]],\r\n      \"attack\": [\r\n        {\r\n          \"attacker\":
-        30,\r\n          \"target\": 29,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 10,\r\n          \"new_target_owner\":
-        0\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn94\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 1, 1, 2, 1, 1, 2, 1, 1,
-        0, 1, 1, 2, 0, 1, 2, 2, 0, 1, 1, 1, 2,\r\n        1, 0, 1, 1, 0, 0, 0, 1,
-        1, 2, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 3, 1, 8, 1, 1, 4, 1, 1, 3, 2, 4, 1, 4, 3, 5, 6, 4, 2, 1, 1, 2,\r\n       
-        1, 3, 2, 3, 2, 10, 1, 4, 1, 1, 4, 4, 1, 1, 3, 2, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[31, 13]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 31,\r\n          \"target\": 28,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 15,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn95\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 1, 1, 2, 1, 1, 2, 1, 1,
-        0, 1, 1, 2, 0, 1, 2, 2, 0, 1, 1, 1, 2,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 2, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 3, 1, 8, 1, 1, 4, 1, 1, 3, 2, 4, 1, 4, 3, 5, 6, 4, 2, 1, 1, 2,\r\n       
-        1, 3, 2, 3, 15, 10, 1, 1, 1, 1, 4, 4, 1, 1, 3, 2, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[17, 10]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 17,\r\n          \"target\": 16,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 9,\r\n          \"new_target_owner\":
-        2\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn96\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 1, 1, 2, 1, 1, 2, 1, 1,
-        0, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 2,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 2, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 3, 1, 8, 1, 1, 4, 1, 1, 3, 2, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1, 2,\r\n       
-        1, 3, 2, 3, 15, 10, 1, 1, 1, 1, 4, 4, 1, 1, 3, 2, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[39, 7]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 29,\r\n          \"target\": 28,\r\n          \"new_troop_count_attacker\":
-        10,\r\n          \"new_troop_count_target\": 15,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn97\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 1, 1, 2, 1, 1, 2, 1, 1,
-        0, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 2,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 2, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 3, 1, 8, 1, 1, 4, 1, 1, 3, 2, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1, 2,\r\n       
-        1, 3, 2, 3, 15, 10, 1, 1, 1, 1, 4, 4, 1, 1, 3, 9, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[12, 17]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 12,\r\n          \"target\": 11,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 12,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn98\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 1, 1, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 2,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 2, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 3, 1, 8, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1, 2,\r\n       
-        1, 3, 2, 3, 15, 10, 1, 1, 1, 1, 4, 4, 1, 1, 3, 9, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[5, 10]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 5,\r\n          \"target\": 4,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 17,\r\n          \"new_target_owner\":
-        2\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn99\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 1, 2, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 2,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 2, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 3, 17, 1, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1,\r\n       
-        2, 1, 3, 2, 3, 15, 10, 1, 1, 1, 1, 4, 4, 1, 1, 3, 9, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[39, 5]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 39,\r\n          \"target\": 33,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 13,\r\n          \"new_target_owner\":
-        0\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn100\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 1, 2, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 2,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 3, 17, 1, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1,\r\n       
-        2, 1, 3, 2, 3, 15, 10, 1, 1, 1, 13, 4, 4, 1, 1, 3, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[22, 17]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 22,\r\n          \"target\": 23,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 17,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn101\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 1, 2, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 3, 17, 1, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1,\r\n       
-        17, 1, 3, 2, 3, 15, 10, 1, 1, 1, 13, 4, 4, 1, 1, 3, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[37, 10]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 4,\r\n          \"target\": 3,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 15,\r\n          \"new_target_owner\":
-        2\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn102\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 2, 2, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 15, 1, 1, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1,\r\n       
-        17, 1, 3, 2, 3, 15, 10, 1, 1, 1, 13, 4, 4, 1, 11, 3, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[34, 7]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 33,\r\n          \"target\": 32,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 12,\r\n          \"new_target_owner\":
-        0\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn103\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 2, 2, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        0, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 15, 1, 1, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1,\r\n       
-        17, 1, 3, 2, 3, 15, 10, 1, 1, 12, 1, 11, 4, 1, 11, 3, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[35, 17]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 35,\r\n          \"target\": 34,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 16,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn104\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 0, 2, 2, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 1, 15, 1, 1, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1,\r\n       
-        17, 1, 3, 2, 3, 15, 10, 1, 1, 12, 1, 16, 1, 1, 11, 3, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[5, 10]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 3,\r\n          \"target\": 2,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 14,\r\n          \"new_target_owner\":
-        2\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn105\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 14, 1, 1, 11, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1,\r\n       
-        17, 1, 3, 2, 3, 15, 10, 1, 1, 12, 1, 16, 1, 1, 11, 3, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[25, 7]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 32,\r\n          \"target\": 31,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 11,\r\n          \"new_target_owner\":
-        0\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn106\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 0, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 14, 1, 1, 11, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 4, 2, 1, 1,\r\n       
-        17, 1, 10, 2, 3, 15, 10, 1, 11, 1, 1, 16, 1, 1, 11, 3, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[27, 17]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 27,\r\n          \"target\": 19,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 17,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn107\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 1, 14, 1, 1, 11, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 17, 2, 1, 1,\r\n       
-        17, 1, 10, 2, 1, 15, 10, 1, 11, 1, 1, 16, 1, 1, 11, 3, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[1, 10]],\r\n      \"attack\": [],\r\n      \"fortify\":
-        {}\r\n    },\r\n    \"turn108\": {\r\n      \"nodes_owner\": [\r\n       
-        2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n       
-        1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 11, 14, 1, 1, 11, 1, 1, 4, 1, 1, 12, 1,
-        4, 1, 4, 9, 1, 6, 17, 2, 1,\r\n        1, 17, 1, 10, 2, 1, 15, 10, 1, 11,
-        1, 1, 16, 1, 1, 11, 3, 1, 3, 1\r\n      ],\r\n      \"add_troop\": [[38,
-        7]],\r\n      \"attack\": [\r\n        {\r\n          \"attacker\": 31,\r\n         
-        \"target\": 28,\r\n          \"new_troop_count_attacker\": 11,\r\n         
-        \"new_troop_count_target\": 15,\r\n          \"new_target_owner\": 1\r\n       
-        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn109\": {\r\n     
-        \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2,
-        0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1,
-        2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11,
-        14, 1, 1, 11, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 17, 2, 1,\r\n       
-        1, 17, 1, 10, 2, 1, 15, 10, 1, 11, 1, 1, 16, 1, 1, 11, 10, 1, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[6, 17]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 6,\r\n          \"target\": 4,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 16,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn110\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 2, 1, 1, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 14, 1, 16, 11, 1, 1, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 17, 2, 1,\r\n       
-        1, 17, 1, 10, 2, 1, 15, 10, 1, 11, 1, 1, 16, 1, 1, 11, 10, 1, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[14, 8]],\r\n      \"attack\": [],\r\n      \"fortify\":
-        {}\r\n    },\r\n    \"turn111\": {\r\n      \"nodes_owner\": [\r\n       
-        2, 2, 2, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n       
-        1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 11, 14, 1, 16, 11, 1, 1, 4, 1, 1, 12, 1,
-        4, 9, 4, 9, 1, 6, 17, 2, 1,\r\n        1, 17, 1, 10, 2, 1, 15, 10, 1, 11,
-        1, 1, 16, 1, 1, 11, 10, 1, 3, 1\r\n      ],\r\n      \"add_troop\": [[33,
-        5]],\r\n      \"attack\": [\r\n        {\r\n          \"attacker\": 31,\r\n         
-        \"target\": 28,\r\n          \"new_troop_count_attacker\": 11,\r\n         
-        \"new_troop_count_target\": 15,\r\n          \"new_target_owner\": 1\r\n       
-        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn112\": {\r\n     
-        \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2,
-        0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1,
-        2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11,
-        14, 1, 16, 11, 1, 1, 4, 1, 1, 12, 1, 4, 9, 4, 9, 1, 6, 17, 2, 1,\r\n       
-        1, 17, 1, 10, 2, 1, 15, 10, 1, 11, 1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[22, 17]],\r\n      \"attack\": [],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn113\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11, 14, 1, 16, 11,
-        1, 1, 4, 1, 1, 12, 1, 4, 9, 4, 9, 1, 6, 17, 2, 1,\r\n        18, 17, 1, 10,
-        2, 1, 15, 10, 1, 11, 1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[14, 8]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 14,\r\n          \"target\": 7,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 16,\r\n          \"new_target_owner\":
-        2\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn114\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 2, 1, 2, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 14, 1, 16, 11, 1, 16, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 17, 2, 1,\r\n       
-        18, 17, 1, 10, 2, 1, 15, 10, 1, 11, 1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[29, 5]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 29,\r\n          \"target\": 28,\r\n          \"new_troop_count_attacker\":
-        15,\r\n          \"new_troop_count_target\": 15,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn115\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 2, 1, 2, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 14, 1, 16, 11, 1, 16, 4, 1, 1, 12, 1, 4, 1, 4, 9, 1, 6, 17, 2, 1,\r\n       
-        18, 17, 1, 10, 2, 1, 15, 15, 1, 11, 1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[12, 15]],\r\n      \"attack\": [],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn116\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11, 14, 1, 16, 11,
-        1, 16, 4, 1, 1, 12, 16, 4, 1, 4, 9, 1, 6, 17, 2,\r\n        1, 18, 17, 1,
-        10, 2, 1, 15, 15, 1, 11, 1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[2, 10]],\r\n      \"attack\": [],\r\n      \"fortify\":
-        {}\r\n    },\r\n    \"turn117\": {\r\n      \"nodes_owner\": [\r\n       
-        2, 2, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n       
-        1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 11, 24, 1, 16, 11, 1, 16, 4, 1, 1, 12, 16,
-        4, 1, 4, 9, 1, 6, 17, 2,\r\n        1, 18, 17, 1, 10, 2, 1, 15, 15, 1, 11,
-        1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n      ],\r\n      \"add_troop\": [[25,
-        5]],\r\n      \"attack\": [\r\n        {\r\n          \"attacker\": 25,\r\n         
-        \"target\": 23,\r\n          \"new_troop_count_attacker\": 15,\r\n         
-        \"new_troop_count_target\": 17,\r\n          \"new_target_owner\": 1\r\n       
-        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn118\": {\r\n     
-        \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 2,
-        0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1,
-        2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11,
-        24, 1, 16, 11, 1, 16, 4, 1, 1, 12, 16, 4, 1, 4, 9, 1, 6, 17, 2,\r\n       
-        1, 18, 17, 1, 15, 2, 1, 15, 15, 1, 11, 1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[13, 15]],\r\n      \"attack\": [\r\n       
-        {\r\n          \"attacker\": 13,\r\n          \"target\": 5,\r\n         
-        \"new_troop_count_attacker\": 1,\r\n          \"new_troop_count_target\":
-        5,\r\n          \"new_target_owner\": 1\r\n        }\r\n      ],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn119\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11, 24, 1, 16, 5,
-        1, 16, 4, 1, 1, 12, 16, 1, 1, 4, 9, 1, 6, 17, 2, 1,\r\n        18, 17, 1,
-        15, 2, 1, 15, 15, 1, 11, 1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[7, 8]],\r\n      \"attack\": [],\r\n      \"fortify\": {}\r\n   
-        },\r\n    \"turn120\": {\r\n      \"nodes_owner\": [\r\n        2, 2, 2,
-        2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n       
-        1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 11, 24, 1, 16, 5, 1, 24, 4, 1, 1, 12, 16,
-        1, 1, 4, 9, 1, 6, 17, 2, 1,\r\n        18, 17, 1, 15, 2, 1, 15, 15, 1, 11,
-        1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n      ],\r\n      \"add_troop\": [[29,
-        5]],\r\n      \"attack\": [\r\n        {\r\n          \"attacker\": 29,\r\n         
-        \"target\": 28,\r\n          \"new_troop_count_attacker\": 1,\r\n         
-        \"new_troop_count_target\": 6,\r\n          \"new_target_owner\": 0\r\n       
-        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn121\": {\r\n     
-        \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2,
-        0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
-        2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11,
-        24, 1, 16, 5, 1, 24, 4, 1, 1, 12, 16, 1, 1, 4, 9, 1, 6, 17, 2, 1,\r\n       
-        18, 17, 1, 15, 2, 1, 6, 1, 1, 11, 1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[20, 15]],\r\n      \"attack\": [],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn122\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11, 24, 1, 16, 5,
-        1, 24, 4, 1, 1, 12, 16, 1, 1, 4, 9, 1, 6, 17, 17,\r\n        1, 18, 17, 1,
-        15, 2, 1, 6, 1, 1, 11, 1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[3, 8]],\r\n      \"attack\": [],\r\n      \"fortify\": {}\r\n   
-        },\r\n    \"turn123\": {\r\n      \"nodes_owner\": [\r\n        2, 2, 2,
-        2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n       
-        1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 11, 24, 9, 16, 5, 1, 24, 4, 1, 1, 12, 16,
-        1, 1, 4, 9, 1, 6, 17, 17,\r\n        1, 18, 17, 1, 15, 2, 1, 6, 1, 1, 11,
-        1, 6, 16, 1, 1, 11, 10, 1, 3, 1\r\n      ],\r\n      \"add_troop\": [[39,
-        9]],\r\n      \"attack\": [\r\n        {\r\n          \"attacker\": 25,\r\n         
-        \"target\": 23,\r\n          \"new_troop_count_attacker\": 15,\r\n         
-        \"new_troop_count_target\": 17,\r\n          \"new_target_owner\": 1\r\n       
-        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn124\": {\r\n     
-        \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2,
-        0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
-        2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11,
-        24, 9, 16, 5, 1, 24, 4, 1, 1, 12, 16, 1, 1, 4, 9, 1, 6, 17, 17,\r\n       
-        1, 18, 17, 1, 15, 2, 1, 6, 1, 1, 11, 1, 6, 16, 1, 1, 11, 10, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[4, 13]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 4,\r\n          \"target\": 3,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 18,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn125\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 1, 1, 1, 1, 2, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 24, 18, 1, 5, 1, 24, 4, 1, 1, 12, 16, 1, 1, 4, 9, 1, 6, 17, 17,\r\n       
-        1, 18, 17, 1, 15, 2, 1, 6, 1, 1, 11, 1, 6, 16, 1, 1, 11, 10, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[37, 8]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 2,\r\n          \"target\": 3,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 13,\r\n          \"new_target_owner\":
-        2\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn126\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 1, 13, 1, 5, 1, 24, 4, 1, 1, 12, 16, 1, 1, 4, 9, 1, 6, 17, 17, 1,\r\n       
-        18, 17, 1, 15, 2, 1, 6, 1, 1, 11, 1, 6, 16, 1, 1, 19, 10, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[29, 7]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 25,\r\n          \"target\": 23,\r\n          \"new_troop_count_attacker\":
-        15,\r\n          \"new_troop_count_target\": 17,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn127\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 1, 13, 1, 5, 1, 24, 4, 1, 1, 12, 16, 1, 1, 4, 9, 1, 6, 17, 17, 1,\r\n       
-        18, 17, 1, 15, 2, 1, 6, 8, 1, 11, 1, 6, 16, 1, 1, 19, 10, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[21, 15]],\r\n      \"attack\": [],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn128\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11, 1, 13, 1, 5,
-        1, 24, 4, 1, 1, 12, 16, 1, 1, 4, 9, 1, 6, 17, 17,\r\n        16, 18, 17,
-        1, 15, 2, 1, 6, 8, 1, 11, 1, 6, 16, 1, 1, 19, 10, 10, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[17, 10]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 7,\r\n          \"target\": 5,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 19,\r\n          \"new_target_owner\":
-        2\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn129\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 2, 1, 2, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 1, 13, 1, 19, 1, 1, 4, 1, 1, 12, 16, 1, 1, 4, 9, 11, 6, 17, 17,\r\n       
-        16, 18, 17, 1, 15, 2, 1, 6, 8, 1, 11, 1, 6, 16, 1, 1, 19, 10, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[33, 7]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 25,\r\n          \"target\": 23,\r\n          \"new_troop_count_attacker\":
-        15,\r\n          \"new_troop_count_target\": 17,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn130\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 2, 1, 2, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 1, 13, 1, 19, 1, 1, 4, 1, 1, 12, 16, 1, 1, 4, 9, 11, 6, 17, 17,\r\n       
-        16, 18, 17, 1, 15, 2, 1, 6, 8, 1, 11, 1, 13, 16, 1, 1, 19, 10, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[6, 13]],\r\n      \"attack\": [],\r\n      \"fortify\":
-        {}\r\n    },\r\n    \"turn131\": {\r\n      \"nodes_owner\": [\r\n       
-        2, 2, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n       
-        1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 11, 1, 13, 1, 19, 14, 1, 4, 1, 1, 12, 16,
-        1, 1, 4, 9, 11, 6, 17, 17,\r\n        16, 18, 17, 1, 15, 2, 1, 6, 8, 1, 11,
-        1, 13, 16, 1, 1, 19, 10, 10, 3, 1\r\n      ],\r\n      \"add_troop\": [[18,
-        10]],\r\n      \"attack\": [\r\n        {\r\n          \"attacker\": 5,\r\n         
-        \"target\": 4,\r\n          \"new_troop_count_attacker\": 1,\r\n         
-        \"new_troop_count_target\": 18,\r\n          \"new_target_owner\": 2\r\n       
-        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn132\": {\r\n     
-        \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 1, 1, 1, 1, 2,
-        0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
-        2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11,
-        1, 13, 18, 1, 14, 1, 4, 1, 1, 12, 16, 1, 1, 4, 9, 11, 16, 17, 17,\r\n       
-        16, 18, 17, 1, 15, 2, 1, 6, 8, 1, 11, 1, 13, 16, 1, 1, 19, 10, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[28, 7]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 25,\r\n          \"target\": 23,\r\n          \"new_troop_count_attacker\":
-        15,\r\n          \"new_troop_count_target\": 17,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn133\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 1, 13, 18, 1, 14, 1, 4, 1, 1, 12, 16, 1, 1, 4, 9, 11, 16, 17, 17,\r\n       
-        16, 18, 17, 1, 15, 2, 1, 13, 8, 1, 11, 1, 13, 16, 1, 1, 19, 10, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[11, 12]],\r\n      \"attack\": [\r\n       
-        {\r\n          \"attacker\": 11,\r\n          \"target\": 8,\r\n         
-        \"new_troop_count_attacker\": 1,\r\n          \"new_troop_count_target\":
-        17,\r\n          \"new_target_owner\": 1\r\n        }\r\n      ],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn134\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11, 1, 13, 18, 1,
-        14, 1, 17, 1, 1, 1, 16, 1, 1, 4, 9, 11, 16, 17, 17,\r\n        16, 18, 17,
-        1, 15, 2, 1, 13, 8, 1, 11, 1, 13, 16, 1, 1, 19, 10, 10, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[3, 10]],\r\n      \"attack\": [],\r\n      \"fortify\":
-        {}\r\n    },\r\n    \"turn135\": {\r\n      \"nodes_owner\": [\r\n       
-        2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n       
-        1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 11, 1, 23, 18, 1, 14, 1, 17, 1, 1, 1, 16,
-        1, 1, 4, 9, 11, 16, 17, 17,\r\n        16, 18, 17, 1, 15, 2, 1, 13, 8, 1,
-        11, 1, 13, 16, 1, 1, 19, 10, 10, 3, 1\r\n      ],\r\n      \"add_troop\":
-        [[32, 7]],\r\n      \"attack\": [\r\n        {\r\n          \"attacker\":
-        25,\r\n          \"target\": 23,\r\n          \"new_troop_count_attacker\":
-        15,\r\n          \"new_troop_count_target\": 17,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn136\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0,
-        0, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 1, 23, 18, 1, 14, 1, 17, 1, 1, 1, 16, 1, 1, 4, 9, 11, 16, 17, 17,\r\n       
-        16, 18, 17, 1, 15, 2, 1, 13, 8, 1, 11, 8, 13, 16, 1, 1, 19, 10, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[34, 15]],\r\n      \"attack\": [\r\n       
-        {\r\n          \"attacker\": 34,\r\n          \"target\": 32,\r\n         
-        \"new_troop_count_attacker\": 1,\r\n          \"new_troop_count_target\":
-        28,\r\n          \"new_target_owner\": 1\r\n        }\r\n      ],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn137\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11, 1, 23, 18, 1,
-        14, 1, 17, 1, 1, 1, 16, 1, 1, 4, 9, 11, 16, 17, 17,\r\n        16, 18, 17,
-        1, 15, 2, 1, 13, 8, 1, 11, 28, 13, 1, 1, 1, 19, 10, 10, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[2, 8]],\r\n      \"attack\": [],\r\n      \"fortify\": {}\r\n   
-        },\r\n    \"turn138\": {\r\n      \"nodes_owner\": [\r\n        2, 2, 2,
-        2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n       
-        1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 11, 9, 23, 18, 1, 14, 1, 17, 1, 1, 1, 16,
-        1, 1, 4, 9, 11, 16, 17, 17,\r\n        16, 18, 17, 1, 15, 2, 1, 13, 8, 1,
-        11, 28, 13, 1, 1, 1, 19, 10, 10, 3, 1\r\n      ],\r\n      \"add_troop\":
-        [[38, 7]],\r\n      \"attack\": [\r\n        {\r\n          \"attacker\":
-        38,\r\n          \"target\": 34,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 15,\r\n          \"new_target_owner\":
-        0\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn139\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 0,
-        1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 11, 9, 23, 18, 1, 14, 1, 17, 1, 1, 1, 16, 1, 1, 4, 9, 11, 16, 17, 17,\r\n       
-        16, 18, 17, 1, 15, 2, 1, 13, 8, 1, 11, 28, 13, 15, 1, 1, 19, 1, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[32, 15]],\r\n      \"attack\": [\r\n       
-        {\r\n          \"attacker\": 32,\r\n          \"target\": 31,\r\n         
-        \"new_troop_count_attacker\": 1,\r\n          \"new_troop_count_target\":
-        37,\r\n          \"new_target_owner\": 1\r\n        }\r\n      ],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn140\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 11, 9, 23, 18, 1,
-        14, 1, 17, 1, 1, 1, 16, 1, 1, 4, 9, 11, 16, 17, 17,\r\n        16, 18, 17,
-        1, 15, 2, 1, 13, 8, 1, 37, 1, 13, 15, 1, 1, 19, 1, 10, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[1, 8]],\r\n      \"attack\": [],\r\n      \"fortify\": {}\r\n   
-        },\r\n    \"turn141\": {\r\n      \"nodes_owner\": [\r\n        2, 2, 2,
-        2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n       
-        1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 19, 9, 23, 18, 1, 14, 1, 17, 1, 1, 1, 16,
-        1, 1, 4, 9, 11, 16, 17, 17,\r\n        16, 18, 17, 1, 15, 2, 1, 13, 8, 1,
-        37, 1, 13, 15, 1, 1, 19, 1, 10, 3, 1\r\n      ],\r\n      \"add_troop\":
-        [[29, 9]],\r\n      \"attack\": [],\r\n      \"fortify\": {}\r\n    },\r\n   
-        \"turn142\": {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 1,
-        2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1,
-        0, 0, 0, 1, 1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\":
-        [\r\n        3, 19, 9, 23, 18, 1, 14, 1, 17, 1, 1, 1, 16, 1, 1, 4, 9, 11,
-        16, 17, 17,\r\n        16, 18, 17, 1, 15, 2, 1, 13, 17, 1, 37, 1, 13, 15,
-        1, 1, 19, 1, 10, 3, 1\r\n      ],\r\n      \"add_troop\": [[13, 15]],\r\n     
-        \"attack\": [\r\n        {\r\n          \"attacker\": 31,\r\n          \"target\":
-        28,\r\n          \"new_troop_count_attacker\": 1,\r\n          \"new_troop_count_target\":
-        32,\r\n          \"new_target_owner\": 1\r\n        }\r\n      ],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn143\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 19, 9, 23, 18, 1,
-        14, 1, 17, 1, 1, 1, 16, 16, 1, 4, 9, 11, 16, 17,\r\n        17, 16, 18, 17,
-        1, 15, 2, 1, 32, 17, 1, 1, 1, 13, 15, 1, 1, 19, 1, 10,\r\n        3, 1\r\n     
-        ],\r\n      \"add_troop\": [[4, 8]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 4,\r\n          \"target\": 6,\r\n          \"new_troop_count_attacker\":
-        1,\r\n          \"new_troop_count_target\": 13,\r\n          \"new_target_owner\":
-        2\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn144\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 19, 9, 23, 1, 1, 13, 1, 17, 1, 1, 1, 16, 16, 1, 4, 9, 11, 16, 17, 17,\r\n       
-        16, 18, 17, 1, 15, 2, 1, 32, 17, 1, 1, 1, 13, 15, 1, 1, 19, 1, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[29, 5]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 29,\r\n          \"target\": 28,\r\n          \"new_troop_count_attacker\":
-        22,\r\n          \"new_troop_count_target\": 32,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn145\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 19, 9, 23, 1, 1, 13, 1, 17, 1, 1, 1, 16, 16, 1, 4, 9, 11, 16, 17, 17,\r\n       
-        16, 18, 17, 1, 15, 2, 1, 32, 22, 1, 1, 1, 13, 15, 1, 1, 19, 1, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[13, 17]],\r\n      \"attack\": [\r\n       
-        {\r\n          \"attacker\": 13,\r\n          \"target\": 5,\r\n         
-        \"new_troop_count_attacker\": 1,\r\n          \"new_troop_count_target\":
-        32,\r\n          \"new_target_owner\": 1\r\n        }\r\n      ],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn146\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 19, 9, 23, 1, 32,
-        13, 1, 17, 1, 1, 1, 16, 1, 1, 4, 9, 11, 16, 17, 17,\r\n        16, 18, 17,
-        1, 15, 2, 1, 32, 22, 1, 1, 1, 13, 15, 1, 1, 19, 1, 10, 3, 1\r\n      ],\r\n     
-        \"add_troop\": [[36, 10]],\r\n      \"attack\": [],\r\n      \"fortify\":
-        {}\r\n    },\r\n    \"turn147\": {\r\n      \"nodes_owner\": [\r\n       
-        2, 2, 2, 2, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n       
-        1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n     
-        \"troop_count\": [\r\n        3, 19, 9, 23, 1, 32, 13, 1, 17, 1, 1, 1, 16,
-        1, 1, 4, 9, 11, 16, 17, 17,\r\n        16, 18, 17, 1, 15, 2, 1, 32, 22, 1,
-        1, 1, 13, 15, 1, 11, 19, 1, 10, 3, 1\r\n      ],\r\n      \"add_troop\":
-        [[25, 5]],\r\n      \"attack\": [\r\n        {\r\n          \"attacker\":
-        29,\r\n          \"target\": 28,\r\n          \"new_troop_count_attacker\":
-        22,\r\n          \"new_troop_count_target\": 32,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn148\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 2, 1, 2, 2, 1, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 19, 9, 23, 1, 32, 13, 1, 17, 1, 1, 1, 16, 1, 1, 4, 9, 11, 16, 17, 17,\r\n       
-        16, 18, 17, 1, 20, 2, 1, 32, 22, 1, 1, 1, 13, 15, 1, 11, 19, 1, 10, 3, 1\r\n     
-        ],\r\n      \"add_troop\": [[11, 17]],\r\n      \"attack\": [\r\n       
-        {\r\n          \"attacker\": 5,\r\n          \"target\": 4,\r\n         
-        \"new_troop_count_attacker\": 1,\r\n          \"new_troop_count_target\":
-        30,\r\n          \"new_target_owner\": 1\r\n        }\r\n      ],\r\n     
-        \"fortify\": {}\r\n    },\r\n    \"turn149\": {\r\n      \"nodes_owner\":
-        [\r\n        2, 2, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 1,
-        1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 2, 0, 0, 1,
-        2\r\n      ],\r\n      \"troop_count\": [\r\n        3, 19, 9, 23, 30, 1,
-        13, 1, 17, 1, 1, 18, 16, 1, 1, 4, 9, 11, 16, 17,\r\n        17, 16, 18, 17,
-        1, 20, 2, 1, 32, 22, 1, 1, 1, 13, 15, 1, 11, 19, 1, 10,\r\n        3, 1\r\n     
-        ],\r\n      \"add_troop\": [[2, 8]],\r\n      \"attack\": [\r\n        {\r\n         
-        \"attacker\": 3,\r\n          \"target\": 4,\r\n          \"new_troop_count_attacker\":
-        23,\r\n          \"new_troop_count_target\": 30,\r\n          \"new_target_owner\":
-        1\r\n        }\r\n      ],\r\n      \"fortify\": {}\r\n    },\r\n    \"turn150\":
-        {\r\n      \"nodes_owner\": [\r\n        2, 2, 2, 2, 1, 1, 2, 2, 1, 1, 1,
-        1, 1, 1, 2, 0, 2, 2, 2, 1, 1, 1, 1, 1,\r\n        1, 0, 1, 1, 1, 0, 0, 1,
-        1, 0, 0, 1, 2, 2, 0, 0, 1, 2\r\n      ],\r\n      \"troop_count\": [\r\n       
-        3, 19, 17, 23, 30, 1, 13, 1, 17, 1, 1, 18, 16, 1, 1, 4, 9, 11, 16, 17,\r\n       
-        17, 16, 18, 17, 1, 20, 2, 1, 32, 22, 1, 1, 1, 13, 15, 1, 11, 19, 1, 10,\r\n       
-        3, 1\r\n      ],\r\n      \"add_troop\": [[39, 5]],\r\n      \"attack\":
-        [\r\n        {\r\n          \"attacker\": 29,\r\n          \"target\": 28,\r\n         
-        \"new_troop_count_attacker\": 22,\r\n          \"new_troop_count_target\":
-        32,\r\n          \"new_target_owner\": 1\r\n        }\r\n      ],\r\n     
-        \"fortify\": {}\r\n    }\r\n  }\r\n}\r\n"
+      value: '{"initialize": [[1, 29], [2, 3], [0, 4], [1, 40], [2, 7], [0, 20],
+        [1, 28], [2, 1], [0, 5], [1, 30], [2, 2], [0, 6], [1, 37], [2, 21], [0, 15],
+        [1, 38], [2, 14], [0, 18], [1, 39], [2, 0], [0, 19], [1, 41], [2, 13], [0,
+        22], [1, 27], [2, 8], [0, 16], [1, 23], [2, 11], [0, 17], [1, 24], [2, 10],
+        [0, 17], [1, 25], [2, 9], [0, 22], [1, 26], [2, 12], [0, 17], [1, 31], [2,
+        36], [0, 22], [1, 32], [2, 35], [0, 15], [1, 33], [2, 34], [0, 16], [1, 37],
+        [2, 7], [0, 6], [1, 23], [2, 8], [0, 15], [1, 33], [2, 34], [0, 16], [1,
+        27], [2, 7], [0, 5], [1, 27], [2, 35], [0, 19], [1, 33], [2, 8], [0, 6],
+        [1, 23], [2, 21], [0, 22], [1, 37], [2, 3], [0, 16], [1, 23], [2, 3], [0,
+        16], [1, 27], [2, 8], [0, 16], [1, 32], [2, 8], [0, 4], [1, 33], [2, 3],
+        [0, 6], [1, 33], [2, 14], [0, 5], [1, 27], [2, 14], [0, 15]], "turns": {"turn91":
+        {"nodes_owner": [2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0,
+        0, 0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count":
+        [1, 1, 1, 4, 2, 3, 4, 3, 5, 1, 1, 1, 1, 1, 3, 4, 6, 3, 1, 2, 1, 2, 4, 4,
+        1, 1, 1, 5, 1, 1, 1, 1, 2, 5, 2, 2, 1, 3, 1, 1, 1, 1], "add_troop": [[41,
+        9]], "attack": [{"attacker": 41, "target": 16, "new_troop_count_attacker":
+        1, "new_troop_count_target": 8, "new_target_owner": 1}], "fortify": {"number_of_troops":
+        1, "path": [16, 41]}}, "turn92": {"nodes_owner": [2, 2, 2, 2, 0, 0, 0, 2,
+        2, 2, 2, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [1, 1, 1, 4, 2, 3, 4, 3, 5, 1,
+        1, 1, 1, 1, 3, 4, 7, 3, 1, 2, 1, 2, 4, 4, 1, 1, 1, 5, 1, 1, 1, 1, 2, 5, 2,
+        2, 1, 3, 1, 1, 1, 2], "add_troop": [[9, 12]], "attack": [], "fortify": {"number_of_troops":
+        1, "path": [9, 8, 13, 11, 10, 12]}}, "turn93": {"nodes_owner": [2, 2, 2,
+        2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 2, 0, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [1, 1, 1, 4, 2,
+        3, 4, 3, 5, 12, 1, 1, 2, 1, 3, 4, 7, 3, 1, 2, 1, 2, 4, 4, 1, 1, 1, 5, 1,
+        1, 1, 1, 2, 5, 2, 2, 1, 3, 1, 1, 1, 2], "add_troop": [[19, 7]], "attack":
+        [{"attacker": 19, "target": 27, "new_troop_count_attacker": 1, "new_troop_count_target":
+        4, "new_target_owner": 0}], "fortify": {"number_of_troops": 1, "path": [6,
+        4, 5]}}, "turn94": {"nodes_owner": [2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2,
+        2, 2, 0, 1, 0, 0, 0, 0, 2, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1,
+        1, 1, 1, 1], "troop_count": [1, 1, 1, 4, 2, 4, 3, 3, 5, 12, 1, 1, 2, 1, 3,
+        4, 7, 3, 1, 1, 1, 2, 4, 4, 1, 1, 1, 4, 1, 1, 1, 1, 2, 5, 2, 2, 1, 3, 1, 1,
+        1, 2], "add_troop": [[30, 12]], "attack": [], "fortify": {"number_of_troops":
+        1, "path": [30, 28]}}, "turn95": {"nodes_owner": [2, 2, 2, 2, 0, 0, 0, 2,
+        2, 2, 2, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 2, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,
+        1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [1, 1, 1, 4, 2, 4, 3, 3, 5, 12,
+        1, 1, 2, 1, 3, 4, 7, 3, 1, 1, 1, 2, 4, 4, 1, 1, 1, 4, 2, 1, 12, 1, 2, 5,
+        2, 2, 1, 3, 1, 1, 1, 2], "add_troop": [[12, 12]], "attack": [], "fortify":
+        {"number_of_troops": 1, "path": [12, 10, 8, 13]}}, "turn96": {"nodes_owner":
+        [2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 2, 0, 1,
+        1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [1,
+        1, 1, 4, 2, 4, 3, 3, 5, 12, 1, 1, 13, 2, 3, 4, 7, 3, 1, 1, 1, 2, 4, 4, 1,
+        1, 1, 4, 2, 1, 12, 1, 2, 5, 2, 2, 1, 3, 1, 1, 1, 2], "add_troop": [[22, 10]],
+        "attack": [{"attacker": 22, "target": 21, "new_troop_count_attacker": 1,
+        "new_troop_count_target": 13, "new_target_owner": 0}], "fortify": {"number_of_troops":
+        1, "path": [21, 15, 20, 18, 17, 19, 27, 22]}}, "turn97": {"nodes_owner":
+        [2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 1,
+        1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [1,
+        1, 1, 4, 2, 4, 3, 3, 5, 12, 1, 1, 13, 2, 3, 4, 7, 3, 1, 1, 1, 12, 2, 4, 1,
+        1, 1, 4, 2, 1, 12, 1, 2, 5, 2, 2, 1, 3, 1, 1, 1, 2], "add_troop": [[28, 9]],
+        "attack": [], "fortify": {}}, "turn98": {"nodes_owner": [2, 2, 2, 2, 0, 0,
+        0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1,
+        1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [1, 1, 1, 4, 2, 4, 3, 3,
+        5, 12, 1, 1, 13, 2, 3, 4, 7, 3, 1, 1, 1, 12, 2, 4, 1, 1, 1, 4, 11, 1, 12,
+        1, 2, 5, 2, 2, 1, 3, 1, 1, 1, 2], "add_troop": [[3, 12]], "attack": [{"attacker":
+        3, "target": 4, "new_troop_count_attacker": 1, "new_troop_count_target":
+        15, "new_target_owner": 2}], "fortify": {"number_of_troops": 1, "path": [4,
+        3, 1, 0, 2]}}, "turn99": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2,
+        2, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2,
+        2, 1, 1, 1, 1, 1], "troop_count": [1, 1, 2, 1, 14, 4, 3, 3, 5, 12, 1, 1,
+        13, 2, 3, 4, 7, 3, 1, 1, 1, 12, 2, 4, 1, 1, 1, 4, 11, 1, 12, 1, 2, 5, 2,
+        2, 1, 3, 1, 1, 1, 2], "add_troop": [[17, 9]], "attack": [{"attacker": 17,
+        "target": 16, "new_troop_count_attacker": 1, "new_troop_count_target": 7,
+        "new_target_owner": 0}], "fortify": {"number_of_troops": 1, "path": [21,
+        15, 20, 18, 16]}}, "turn100": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 2, 2,
+        2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
+        2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [1, 1, 2, 1, 14, 4, 3, 3, 5, 12,
+        1, 1, 13, 2, 3, 4, 8, 1, 1, 1, 1, 11, 2, 4, 1, 1, 1, 4, 11, 1, 12, 1, 2,
+        5, 2, 2, 1, 3, 1, 1, 1, 2], "add_troop": [[25, 9]], "attack": [], "fortify":
+        {"number_of_troops": 1, "path": [30, 28, 31, 32, 33, 38, 37]}}, "turn101":
+        {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0,
+        0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count":
+        [1, 1, 2, 1, 14, 4, 3, 3, 5, 12, 1, 1, 13, 2, 3, 4, 8, 1, 1, 1, 1, 11, 2,
+        4, 1, 10, 1, 4, 11, 1, 11, 1, 2, 5, 2, 2, 1, 4, 1, 1, 1, 2], "add_troop":
+        [[0, 16]], "attack": [], "fortify": {"number_of_troops": 1, "path": [0, 1,
+        2]}}, "turn102": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2,
+        2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1,
+        1, 1, 1, 1], "troop_count": [16, 1, 3, 1, 14, 4, 3, 3, 5, 12, 1, 1, 13, 2,
+        3, 4, 8, 1, 1, 1, 1, 11, 2, 4, 1, 10, 1, 4, 11, 1, 11, 1, 2, 5, 2, 2, 1,
+        4, 1, 1, 1, 2], "add_troop": [[6, 9]], "attack": [{"attacker": 6, "target":
+        4, "new_troop_count_attacker": 12, "new_troop_count_target": 14, "new_target_owner":
+        2}], "fortify": {"number_of_troops": 1, "path": [6, 21, 15, 20, 18, 16]}},
+        "turn103": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2,
+        0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1,
+        1, 1], "troop_count": [16, 1, 3, 1, 14, 4, 11, 3, 5, 12, 1, 1, 13, 2, 3,
+        4, 9, 1, 1, 1, 1, 11, 2, 4, 1, 10, 1, 4, 11, 1, 11, 1, 2, 5, 2, 2, 1, 4,
+        1, 1, 1, 2], "add_troop": [[30, 9]], "attack": [], "fortify": {"number_of_troops":
+        1, "path": [30, 28, 29]}}, "turn104": {"nodes_owner": [2, 2, 2, 2, 2, 0,
+        0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1,
+        1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [16, 1, 3, 1, 14, 4, 11,
+        3, 5, 12, 1, 1, 13, 2, 3, 4, 9, 1, 1, 1, 1, 11, 2, 4, 1, 10, 1, 4, 11, 2,
+        19, 1, 2, 5, 2, 2, 1, 4, 1, 1, 1, 2], "add_troop": [[3, 13]], "attack": [],
+        "fortify": {"number_of_troops": 1, "path": [0, 1]}}, "turn105": {"nodes_owner":
+        [2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [15,
+        2, 3, 14, 14, 4, 11, 3, 5, 12, 1, 1, 13, 2, 3, 4, 9, 1, 1, 1, 1, 11, 2, 4,
+        1, 10, 1, 4, 11, 2, 19, 1, 2, 5, 2, 2, 1, 4, 1, 1, 1, 2], "add_troop": [[19,
+        6]], "attack": [{"attacker": 6, "target": 4, "new_troop_count_attacker":
+        11, "new_troop_count_target": 14, "new_target_owner": 2}], "fortify": {"number_of_troops":
+        1, "path": [6, 21, 15, 20, 18]}}, "turn106": {"nodes_owner": [2, 2, 2, 2,
+        2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1,
+        1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [15, 2, 3, 14, 14,
+        4, 10, 3, 5, 12, 1, 1, 13, 2, 3, 4, 9, 1, 2, 7, 1, 11, 2, 4, 1, 10, 1, 4,
+        11, 2, 19, 1, 2, 5, 2, 2, 1, 4, 1, 1, 1, 2], "add_troop": [[24, 9]], "attack":
+        [], "fortify": {"number_of_troops": 1, "path": [30, 28]}}, "turn107": {"nodes_owner":
+        [2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [15,
+        2, 3, 14, 14, 4, 10, 3, 5, 12, 1, 1, 13, 2, 3, 4, 9, 1, 2, 7, 1, 11, 2, 4,
+        10, 10, 1, 4, 12, 2, 18, 1, 2, 5, 2, 2, 1, 4, 1, 1, 1, 2], "add_troop": [[35,
+        13]], "attack": [], "fortify": {"number_of_troops": 1, "path": [0, 1, 2,
+        3]}}, "turn108": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2,
+        2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1,
+        1, 1, 1, 1], "troop_count": [14, 2, 3, 15, 14, 4, 10, 3, 5, 12, 1, 1, 13,
+        2, 3, 4, 9, 1, 2, 7, 1, 11, 2, 4, 10, 10, 1, 4, 12, 2, 18, 1, 2, 5, 2, 15,
+        1, 4, 1, 1, 1, 2], "add_troop": [[17, 6]], "attack": [{"attacker": 21, "target":
+        7, "new_troop_count_attacker": 1, "new_troop_count_target": 10, "new_target_owner":
+        0}], "fortify": {"number_of_troops": 1, "path": [6, 5, 7, 21, 15]}}, "turn109":
+        {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0,
+        0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count":
+        [14, 2, 3, 15, 14, 4, 9, 10, 5, 12, 1, 1, 13, 2, 3, 5, 9, 7, 2, 7, 1, 1,
+        2, 4, 10, 10, 1, 4, 12, 2, 18, 1, 2, 5, 2, 15, 1, 4, 1, 1, 1, 2], "add_troop":
+        [[41, 9]], "attack": [], "fortify": {}}, "turn110": {"nodes_owner": [2, 2,
+        2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+        0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [14, 2, 3, 15,
+        14, 4, 9, 10, 5, 12, 1, 1, 13, 2, 3, 5, 9, 7, 2, 7, 1, 1, 2, 4, 10, 10, 1,
+        4, 12, 2, 18, 1, 2, 5, 2, 15, 1, 4, 1, 1, 1, 11], "add_troop": [[0, 8]],
+        "attack": [], "fortify": {"number_of_troops": 1, "path": [0, 1]}}, "turn111":
+        {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0,
+        0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count":
+        [21, 3, 3, 15, 14, 4, 9, 10, 5, 12, 1, 1, 13, 2, 3, 5, 9, 7, 2, 7, 1, 1,
+        2, 4, 10, 10, 1, 4, 12, 2, 18, 1, 2, 5, 2, 15, 1, 4, 1, 1, 1, 11], "add_troop":
+        [[15, 15]], "attack": [{"attacker": 15, "target": 14, "new_troop_count_attacker":
+        1, "new_troop_count_target": 16, "new_target_owner": 0}], "fortify": {}},
+        "turn112": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1,
+        1, 1], "troop_count": [21, 3, 3, 15, 14, 4, 9, 10, 5, 12, 1, 1, 13, 2, 16,
+        1, 9, 7, 2, 7, 1, 1, 2, 4, 10, 10, 1, 4, 12, 2, 18, 1, 2, 5, 2, 15, 1, 4,
+        1, 1, 1, 11], "add_troop": [[40, 9]], "attack": [], "fortify": {"number_of_troops":
+        1, "path": [30, 28, 31, 32, 33, 38, 37, 40]}}, "turn113": {"nodes_owner":
+        [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1], "troop_count": [21,
+        3, 3, 15, 14, 4, 9, 10, 5, 12, 1, 1, 13, 2, 16, 1, 9, 7, 2, 7, 1, 1, 2, 4,
+        10, 10, 1, 4, 12, 2, 17, 1, 2, 5, 2, 15, 1, 4, 1, 1, 11, 11], "add_troop":
+        [[3, 7]], "attack": [], "fortify": {"number_of_troops": 1, "path": [3, 1,
+        0]}}, "turn114": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1,
+        1, 1, 1, 1], "troop_count": [22, 3, 3, 21, 14, 4, 9, 10, 5, 12, 1, 1, 13,
+        2, 16, 1, 9, 7, 2, 7, 1, 1, 2, 4, 10, 10, 1, 4, 12, 2, 17, 1, 2, 5, 2, 15,
+        1, 4, 1, 1, 11, 11], "add_troop": [[17, 15]], "attack": [{"attacker": 17,
+        "target": 41, "new_troop_count_attacker": 1, "new_troop_count_target": 17,
+        "new_target_owner": 0}], "fortify": {}}, "turn115": {"nodes_owner": [2, 2,
+        2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+        0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 0], "troop_count": [22, 3, 3, 21,
+        14, 4, 9, 10, 5, 12, 1, 1, 13, 2, 16, 1, 9, 1, 2, 7, 1, 1, 2, 4, 10, 10,
+        1, 4, 12, 2, 17, 1, 2, 5, 2, 15, 1, 4, 1, 1, 11, 17], "add_troop": [[29,
+        8]], "attack": [], "fortify": {"number_of_troops": 1, "path": [30, 28, 31,
+        32]}}, "turn116": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1,
+        1, 1, 1, 0], "troop_count": [22, 3, 3, 21, 14, 4, 9, 10, 5, 12, 1, 1, 13,
+        2, 16, 1, 9, 1, 2, 7, 1, 1, 2, 4, 10, 10, 1, 4, 12, 10, 16, 1, 3, 5, 2, 15,
+        1, 4, 1, 1, 11, 17], "add_troop": [[10, 7]], "attack": [], "fortify": {}},
+        "turn117": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1,
+        1, 0], "troop_count": [22, 3, 3, 21, 14, 4, 9, 10, 5, 12, 8, 1, 13, 2, 16,
+        1, 9, 1, 2, 7, 1, 1, 2, 4, 10, 10, 1, 4, 12, 10, 16, 1, 3, 5, 2, 15, 1, 4,
+        1, 1, 11, 17], "add_troop": [[17, 15]], "attack": [{"attacker": 41, "target":
+        40, "new_troop_count_attacker": 1, "new_troop_count_target": 12, "new_target_owner":
+        0}], "fortify": {"number_of_troops": 1, "path": [14, 5, 6, 7, 21, 15, 20,
+        18, 16, 17, 19, 27, 22]}}, "turn118": {"nodes_owner": [2, 2, 2, 2, 2, 0,
+        0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1,
+        1, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0], "troop_count": [22, 3, 3, 21, 14, 4, 9,
+        10, 5, 12, 8, 1, 13, 2, 15, 1, 9, 16, 2, 7, 1, 1, 3, 4, 10, 10, 1, 4, 12,
+        10, 16, 1, 3, 5, 2, 15, 1, 4, 1, 1, 12, 1], "add_troop": [[24, 5]], "attack":
+        [], "fortify": {}}, "turn119": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2,
+        2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
+        2, 2, 2, 1, 1, 1, 0, 0], "troop_count": [22, 3, 3, 21, 14, 4, 9, 10, 5, 12,
+        8, 1, 13, 2, 15, 1, 9, 16, 2, 7, 1, 1, 3, 4, 15, 10, 1, 4, 12, 10, 16, 1,
+        3, 5, 2, 15, 1, 4, 1, 1, 12, 1], "add_troop": [[10, 7]], "attack": [], "fortify":
+        {}}, "turn120": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1,
+        1, 0, 0], "troop_count": [22, 3, 3, 21, 14, 4, 9, 10, 5, 12, 15, 1, 13, 2,
+        15, 1, 9, 16, 2, 7, 1, 1, 3, 4, 15, 10, 1, 4, 12, 10, 16, 1, 3, 5, 2, 15,
+        1, 4, 1, 1, 12, 1], "add_troop": [[7, 19]], "attack": [], "fortify": {}},
+        "turn121": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1,
+        0, 0], "troop_count": [22, 3, 3, 21, 14, 4, 9, 29, 5, 12, 15, 1, 13, 2, 15,
+        1, 9, 16, 2, 7, 1, 1, 3, 4, 15, 10, 1, 4, 12, 10, 16, 1, 3, 5, 2, 15, 1,
+        4, 1, 1, 12, 1], "add_troop": [[24, 5]], "attack": [], "fortify": {"number_of_troops":
+        1, "path": [24, 23, 25, 26]}}, "turn122": {"nodes_owner": [2, 2, 2, 2, 2,
+        0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1,
+        1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0], "troop_count": [22, 3, 3, 21, 14, 4,
+        9, 29, 5, 12, 15, 1, 13, 2, 15, 1, 9, 16, 2, 7, 1, 1, 3, 4, 19, 10, 2, 4,
+        12, 10, 16, 1, 3, 5, 2, 15, 1, 4, 1, 1, 12, 1], "add_troop": [[13, 7]], "attack":
+        [], "fortify": {"number_of_troops": 1, "path": [0, 1, 2]}}, "turn123": {"nodes_owner":
+        [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0], "troop_count": [21,
+        3, 4, 21, 14, 4, 9, 29, 5, 12, 15, 1, 13, 9, 15, 1, 9, 16, 2, 7, 1, 1, 3,
+        4, 19, 10, 2, 4, 12, 10, 16, 1, 3, 5, 2, 15, 1, 4, 1, 1, 12, 1], "add_troop":
+        [[15, 16]], "attack": [], "fortify": {"number_of_troops": 1, "path": [7,
+        5, 6]}}, "turn124": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2,
+        2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2,
+        1, 1, 1, 0, 0], "troop_count": [21, 3, 4, 21, 14, 4, 10, 28, 5, 12, 15, 1,
+        13, 9, 15, 17, 9, 16, 2, 7, 1, 1, 3, 4, 19, 10, 2, 4, 12, 10, 16, 1, 3, 5,
+        2, 15, 1, 4, 1, 1, 12, 1], "add_troop": [[30, 5]], "attack": [], "fortify":
+        {"number_of_troops": 1, "path": [30, 28]}}, "turn125": {"nodes_owner": [2,
+        2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+        1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0], "troop_count": [21, 3, 4,
+        21, 14, 4, 10, 28, 5, 12, 15, 1, 13, 9, 15, 17, 9, 16, 2, 7, 1, 1, 3, 4,
+        19, 10, 2, 4, 13, 10, 20, 1, 3, 5, 2, 15, 1, 4, 1, 1, 12, 1], "add_troop":
+        [[34, 7]], "attack": [], "fortify": {"number_of_troops": 1, "path": [0, 1,
+        2, 3, 4]}}, "turn126": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2,
+        2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2,
+        2, 1, 1, 1, 0, 0], "troop_count": [20, 3, 4, 21, 15, 4, 10, 28, 5, 12, 15,
+        1, 13, 9, 15, 17, 9, 16, 2, 7, 1, 1, 3, 4, 19, 10, 2, 4, 13, 10, 20, 1, 3,
+        5, 9, 15, 1, 4, 1, 1, 12, 1], "add_troop": [[18, 16]], "attack": [], "fortify":
+        {"number_of_troops": 1, "path": [7, 5, 6, 21, 15]}}, "turn127": {"nodes_owner":
+        [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0], "troop_count": [20,
+        3, 4, 21, 15, 4, 10, 27, 5, 12, 15, 1, 13, 9, 15, 18, 9, 16, 18, 7, 1, 1,
+        3, 4, 19, 10, 2, 4, 13, 10, 20, 1, 3, 5, 9, 15, 1, 4, 1, 1, 12, 1], "add_troop":
+        [[28, 5]], "attack": [], "fortify": {"number_of_troops": 1, "path": [30,
+        28, 31]}}, "turn128": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2,
+        2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2,
+        1, 1, 1, 0, 0], "troop_count": [20, 3, 4, 21, 15, 4, 10, 27, 5, 12, 15, 1,
+        13, 9, 15, 18, 9, 16, 18, 7, 1, 1, 3, 4, 19, 10, 2, 4, 18, 10, 19, 2, 3,
+        5, 9, 15, 1, 4, 1, 1, 12, 1], "add_troop": [[9, 7]], "attack": [], "fortify":
+        {"number_of_troops": 1, "path": [3, 1, 0, 2]}}, "turn129": {"nodes_owner":
+        [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0], "troop_count": [20,
+        3, 5, 20, 15, 4, 10, 27, 5, 19, 15, 1, 13, 9, 15, 18, 9, 16, 18, 7, 1, 1,
+        3, 4, 19, 10, 2, 4, 18, 10, 19, 2, 3, 5, 9, 15, 1, 4, 1, 1, 12, 1], "add_troop":
+        [[6, 16]], "attack": [], "fortify": {"number_of_troops": 1, "path": [7, 5,
+        6, 21, 15, 20, 18, 16, 17, 19, 27, 22]}}, "turn130": {"nodes_owner": [2,
+        2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+        1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0], "troop_count": [20, 3, 5,
+        20, 15, 4, 26, 26, 5, 19, 15, 1, 13, 9, 15, 18, 9, 16, 18, 7, 1, 1, 4, 4,
+        19, 10, 2, 4, 18, 10, 19, 2, 3, 5, 9, 15, 1, 4, 1, 1, 12, 1], "add_troop":
+        [[38, 5]], "attack": [], "fortify": {"number_of_troops": 1, "path": [24,
+        23, 25, 26]}}, "turn131": {"nodes_owner": [2, 2, 2, 2, 2, 0, 0, 0, 2, 2,
+        2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2,
+        2, 2, 1, 1, 1, 0, 0], "troop_count": [20, 3, 5, 20, 15, 4, 26, 26, 5, 19,
+        15, 1, 13, 9, 15, 18, 9, 16, 18, 7, 1, 1, 4, 4, 18, 10, 3, 4, 18, 10, 19,
+        2, 3, 5, 9, 15, 1, 4, 6, 1, 12, 1], "add_troop": [[0, 7]], "attack": [],
+        "fortify": {"number_of_troops": 1, "path": [0, 1]}}, "turn132": {"nodes_owner":
+        [2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0], "troop_count": [26,
+        4, 5, 20, 15, 4, 26, 26, 5, 19, 15, 1, 13, 9, 15, 18, 9, 16, 18, 7, 1, 1,
+        4, 4, 18, 10, 3, 4, 18, 10, 19, 2, 3, 5, 9, 15, 1, 4, 6, 1, 12, 1], "add_troop":
+        [[20, 16]], "attack": [{"attacker": 6, "target": 4, "new_troop_count_attacker":
+        1, "new_troop_count_target": 16, "new_target_owner": 0}], "fortify": {"number_of_troops":
+        1, "path": [7, 5, 4, 6, 21, 15, 20, 18, 16, 17, 19, 27, 22]}}}}'
       objectReference: {fileID: 0}
     - target: {fileID: 1867234881832925049, guid: 8201c22c2e81dd44f9a5854a588d0e07, type: 3}
       propertyPath: consoleUI

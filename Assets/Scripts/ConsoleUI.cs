@@ -8,8 +8,6 @@ public class ConsoleUI : MonoBehaviour
 {
     [SerializeField] GameObject UIObjectPrefab;
     [SerializeField] RectTransform contentBox;
-
-
     public void AddLogEntry(string text)
     {
         var uiObj = Instantiate(UIObjectPrefab, contentBox);

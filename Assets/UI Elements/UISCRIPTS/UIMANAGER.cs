@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using static UnityEngine.Rendering.DebugUI;
 
 public class UIMANAGER : MonoBehaviour
@@ -22,7 +23,7 @@ public class UIMANAGER : MonoBehaviour
     [Header("PLAYER")]
     public TextMeshProUGUI[] TeamNames_Dis;
     public Image[] PlayerFlags;
-   
+
 
     [Header("Leaderboard")]
     public TextMeshProUGUI[] Names_Dis;
@@ -31,10 +32,25 @@ public class UIMANAGER : MonoBehaviour
     public TextMeshProUGUI TurnNumber;
 
     [Header("Video Player")]
+    public GameObject PlayButton;
+    public GameObject PauseButton;
     public TextMeshProUGUI TotalActions_Dis;
     public TextMeshProUGUI CurrentAction_Dis;
     public Slider MainSlider;
-    public bool Play_Pause;
+    public bool Play_Pause
+    {
+        get
+        {
+            return _Play_Pause;
+        }
+        set
+        {
+            _Play_Pause = value;
+            PlayButton.SetActive(!value);
+            PauseButton.SetActive(value);
+        }
+    }
+    bool _Play_Pause;
     public string gamespeed;
 
 
@@ -60,8 +76,22 @@ public class UIMANAGER : MonoBehaviour
     public Slider Movment_speed;
     public TextMeshProUGUI Movment_speed_text;
 
-    public bool Autozoom;
+    public GameObject autozoom_On;
+    public GameObject autozoom_Off;
 
+    public bool Autozoom
+    {
+        get
+        {
+            return _Autozoom;
+        } set
+        {
+            _Autozoom = value;
+            autozoom_On.SetActive(value);
+            autozoom_Off.SetActive(!value);
+        }
+    }
+    bool _Autozoom;
 
     [Header("Actions")]
     [SerializeField] private GameObject Attack_eventUI;
@@ -96,7 +126,7 @@ public class UIMANAGER : MonoBehaviour
     {
         masker.SetActive(false);
         CurrentAction_Dis.text = "0";
-        Play_Pause = true;
+        Play_Pause = false;
         LoadSettings();
     }
 
@@ -120,12 +150,18 @@ public class UIMANAGER : MonoBehaviour
 
     void LoadSettings()
     {
-        Master_Volume.value = audioSettings.MasterVolume;
-        Music_Volume.value = audioSettings.MusicVolume;
-        SFX_Volume.value = audioSettings.SFXVolume;
-        Mouse_Sens.value = cameraSettings.Sensitiviy;
-        Movment_speed.value = cameraSettings.MovementSpeed;
+        LoadAudioSettings(audioSettings);
         Autozoom = cameraSettings.AutoFocus;
+        Master_Volume.SetValueWithoutNotify(audioSettings.MasterVolume);
+        Master_Volume_text.text = audioSettings.MasterVolume.ToString();
+        Music_Volume.SetValueWithoutNotify (audioSettings.MusicVolume);
+        Music_Volume_text.text = audioSettings.MusicVolume.ToString();
+        SFX_Volume.SetValueWithoutNotify(audioSettings.SFXVolume);
+        SFX_Volume_text.text = audioSettings.SFXVolume.ToString();
+        Mouse_Sens.SetValueWithoutNotify(cameraSettings.Sensitiviy);
+        Mouse_Sens_text.text = cameraSettings.Sensitiviy.ToString("0.0");
+        Movment_speed.SetValueWithoutNotify(cameraSettings.MovementSpeed);
+        Movment_speed_text.text = cameraSettings.MovementSpeed.ToString("0.0");
     }
 
 
@@ -161,7 +197,6 @@ public class UIMANAGER : MonoBehaviour
         masker.SetActive(true);
     }
 
-
     //{ATTACK MANAGER}
     public void AttackManager(bool isattack, int incharge, int defender, int attacktroops, int defendtroops)
     {
@@ -194,7 +229,6 @@ public class UIMANAGER : MonoBehaviour
             Attack_eventUI.SetActive(false);
         }
     }
-
 
     //{ADD TROOPS MANAGER}
     public void ADDManager(bool isadding, int incharge, int troops, int planetnumber)
@@ -254,6 +288,8 @@ public class UIMANAGER : MonoBehaviour
         AddTroops_eventUI.SetActive(false);
         attack_display.SetActive(false);
         Attack_eventUI.SetActive(false);
+        fortify_display.SetActive(false);
+        Fortify_eventUI.SetActive(false);
     }
 
 
@@ -331,10 +367,10 @@ public class UIMANAGER : MonoBehaviour
         switch(Play_Pause)
         {
             case true:
-                actionManager.Pause();
+                actionManager.Play();
                 break;
             case false:
-                actionManager.Play();
+                actionManager.Pause();
                 break;
         }
     }
@@ -349,15 +385,15 @@ public class UIMANAGER : MonoBehaviour
 
     private void OnEnable()
     {
-        audioSettings.OnSettingChange += OnAudioSettingChange;
+        audioSettings.OnSettingChange += LoadAudioSettings;
     }
 
     private void OnDisable()
     {
-        audioSettings.OnSettingChange -= OnAudioSettingChange;
+        audioSettings.OnSettingChange -= LoadAudioSettings;
     }
 
-    public void OnAudioSettingChange(AudioSettings settings)
+    public void LoadAudioSettings(AudioSettings settings)
     {
         masterMixer.SetFloat("MasterVolume", Mathf.Lerp(-40,10, settings.MasterVolume / 100));
         masterMixer.SetFloat("MusicVolume",  Mathf.Lerp(-40, 10, settings.MusicVolume / 100));

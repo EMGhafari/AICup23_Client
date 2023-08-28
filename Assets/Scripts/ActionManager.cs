@@ -9,6 +9,7 @@ using Utilities;
 public class ActionManager : MonoBehaviour , IActionPerformer
 {
     [SerializeField][TextArea] string testJSON;
+    [SerializeField] MapMaker mapMaker;
 
     List<Actions.Action> actionStack;
     int stackIndex = 0;
@@ -32,7 +33,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     void Start()
     {
         actionLine = GetComponent<LineRenderer>();
-        LoadActions();
+        LoadActions(mapMaker.CreateMap());
         mainUI.Initialize(playerStyles, this, actionStack.Count , 3);
         StartCoroutine(StartFirstPlayback());
     }
@@ -50,7 +51,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     }
     */
 
-    void LoadActions()
+    void LoadActions(int planetCount)
     {
         int turnID = 0;
         actionStack = new List<Actions.Action>();
@@ -58,7 +59,6 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         string logJson = GameManager.Instance == null ? testJSON : GameManager.Instance.getLog();
         LogUtility.Log loadedLog = LogUtility.Deserialize(logJson);
 
-        int planetCount = loadedLog.turns.Values.ToArray()[0].nodes_owner.Length;
 
         int[] owners = new int[planetCount];
         int[] counts = new int[planetCount];
@@ -172,14 +172,11 @@ public class ActionManager : MonoBehaviour , IActionPerformer
 
         mainUI.AttackManager(true, planets[info.attacker].GetOwner(), planets[info.target].GetOwner(), damageToAttacker, planets[info.target].TroopCount);
 
-
         planets[info.target].SetOwner(info.new_target_owner);
         planets[info.attacker].TroopCount = info.new_troop_count_attacker;
         planets[info.target].TroopCount = info.new_troop_count_target;
 
-
         if(success) planets[info.target].SpawnText("+" + info.new_troop_count_target);
-
 
         Vector3 attachPos = planets[info.attacker].gameObject.transform.position;
         Vector3 targetPos = planets[info.target].gameObject.transform.position;
@@ -234,6 +231,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
 
         this.stackIndex = stackIndex;
         loopCoroutine = StartCoroutine(RunAction(actionStack[stackIndex]));
+        if(Time.timeScale > 0) mainUI.Play_Pause = true;
     }
 
     public void Pause()
@@ -246,7 +244,6 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         if(loopCoroutine == null) { loopCoroutine = StartCoroutine(RunAction(actionStack[stackIndex])); }
         Time.timeScale = 1;
     }
-
 
     public void ForwardButton()
     {

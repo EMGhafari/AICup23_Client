@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,5 +27,10 @@ public class MenuUI : MonoBehaviour
         {
             GameManager.Instance.Debug("Invalid map or log",3);
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

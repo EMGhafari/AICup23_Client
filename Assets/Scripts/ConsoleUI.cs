@@ -16,9 +16,11 @@ public class ConsoleUI : MonoBehaviour
         //StartCoroutine(currectPos());
     }
 
+    /*
     IEnumerator currectPos()
     {
         yield return null;
         GetComponent<ScrollRect>().verticalScrollbar.value = 0;
     }
+    */
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,15 +42,55 @@ public class GameManager : MonoBehaviour
 
     public void setLog(string log)
     {
-        logContent = log;
+        if (checkLog(log))
+        {
+            logContent = log;
+            Debug("Successfully loaded log!", 2);
+        } else
+        {
+            Debug("Wrong file format", 2);
+        }
     }
+
+
+    public bool checkLog(string log)
+    {
+        try
+        {
+            LogUtility.Deserialize(log);
+        } catch
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public bool checkMap(string map)
+    {
+        try
+        {
+            MapUtility.Deserialize(map);
+        } catch
+        {
+            return false;
+        }
+        return true;
+    }
+
 
     public string getMap()
     {
         return mapContent;
     }
-    public void setMap(string map) { 
-        mapContent = map;   
+    public void setMap(string map) {
+        if (checkMap(map))
+        {
+            mapContent = map;
+            Debug("Successfully loaded map!", 2);
+        } else
+        {
+            Debug("Wrong map format", 2);
+        }
     }
 
     public bool readyToPlay()

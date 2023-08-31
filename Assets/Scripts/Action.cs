@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using Utilities;
-using static Utilities.LogUtility;
 
 namespace Actions
 {
@@ -12,12 +10,14 @@ namespace Actions
     {
         public int[] owners;
         public int[] counts;
+        public int[] forts;
 
-        public Action(int turnId, int[] owners, int[] counts)
+        public Action(int turnId, int[] owners, int[] counts, int[] forts)
         {
             this.turnId = turnId;
             this.owners = (int[])owners.Clone();
             this.counts = (int[])counts.Clone();
+            this.forts = (int[])forts.Clone();
         }
 
         public enum Type
@@ -49,9 +49,10 @@ namespace Actions
         public int new_troop_count_attacker;
         public int new_troop_count_target;
         public int new_target_owner;
+        public int new_fort_troop;
 
 
-        public Attack(LogUtility.Attack attack , int turnId, int[] owners, int[] counts) : base(turnId, owners, counts) 
+        public Attack(LogUtility.Attack attack , int turnId, int[] owners, int[] counts, int[] forts) : base(turnId, owners, counts, forts) 
         {
             type = Type.attack;
             durationMultiplyer = 1;
@@ -60,6 +61,7 @@ namespace Actions
             new_troop_count_attacker = attack.new_troop_count_attacker;
             new_troop_count_target = attack.new_troop_count_target;
             new_target_owner = attack.new_target_owner;
+            new_fort_troop = attack.new_fort_troop;
         }
         public override void Perform(IActionPerformer performer)
         {
@@ -70,6 +72,7 @@ namespace Actions
                 new_target_owner = new_target_owner,
                 new_troop_count_attacker = new_troop_count_attacker,
                 new_troop_count_target = new_troop_count_target,
+                new_fort_troop = new_fort_troop,
             };
             performer.PerformAttack(info);
         }
@@ -88,8 +91,8 @@ namespace Actions
     {
         public int number_of_troops;
         public int[] path;
-        public Fortify(LogUtility.Fortify fortify, int turnId, int[] owners, int[] counts)
-            : base(turnId, owners, counts)
+        public Fortify(LogUtility.Fortify fortify, int turnId, int[] owners, int[] counts, int[] forts)
+            : base(turnId, owners, counts, forts)
         {
             type = Type.fortify;
             durationMultiplyer = 0.75f;
@@ -114,8 +117,8 @@ namespace Actions
 
     public class Add:Action
     {
-        public Add(int node, int amount, int turnId, int[] owners, int[] counts, int? owner = null)
-            : base(turnId, owners, counts)
+        public Add(int node, int amount, int turnId, int[] owners, int[] counts, int[] forts, int? owner = null)
+            : base(turnId, owners, counts, forts)
         {
             type = Type.add;
             durationMultiplyer = 0.2f;
@@ -136,6 +139,30 @@ namespace Actions
             return output;
         }
     }
+
+    public class Fort : Action
+    {
+        int node;
+        int amount;
+
+        public Fort(int node, int amount, int[] owners, int[] counts, int[] forts, int turnId) : base(turnId,owners,counts, forts)
+        {
+            durationMultiplyer = 0.35f;
+            this.node = node;
+            this.amount = amount;
+        }
+        public override void Perform(IActionPerformer performer)
+        {
+            performer.PerformFort(node, amount);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + "Fort " + amount + " troops in " + node;
+        }
+    }
+
+
 
     /*
     public class Update : Action

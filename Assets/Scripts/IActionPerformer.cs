@@ -12,4 +12,7 @@ public interface IActionPerformer
     void PerformAdd(int node, int amount, int? owner = null);
 
     void PerformFortify(LogUtility.Fortify info);
+
+
+    void PerformFort(int node, int amount);
 }

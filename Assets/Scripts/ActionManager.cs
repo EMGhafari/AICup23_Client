@@ -1,9 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Utilities;
 
 public class ActionManager : MonoBehaviour , IActionPerformer
@@ -11,6 +10,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     [SerializeField][TextArea] string testJSON;
     [SerializeField] MapMaker mapMaker;
 
+    int[] playerFinalScores;
     List<Actions.Action> actionStack;
     int stackIndex = 0;
 
@@ -62,11 +62,12 @@ public class ActionManager : MonoBehaviour , IActionPerformer
 
         int[] owners = new int[planetCount];
         int[] counts = new int[planetCount];
+        int[] forts = new int[planetCount];
         for(int i = 0; i < planetCount; i++) { owners[i] = -1; }
 
         foreach(int[] move in loadedLog.initialize)
         {
-            Actions.Add action = new Actions.Add(move[1], 1, turnID++, owners, counts, move[0]);
+            Actions.Add action = new Actions.Add(move[1], 1, turnID++, owners, counts, forts, move[0]);
             actionStack.Add(action);
             Actions.Utilities.UpdateMapInfo(owners, counts, action);
         }
@@ -78,24 +79,46 @@ public class ActionManager : MonoBehaviour , IActionPerformer
             foreach (int[] add in turn.Value.add_troop)
             {
                 int? owner = owners[add[0]] == -1 ? turnID % 3 : null;
-                Actions.Add action = new Actions.Add(add[0], add[1], turnID, owners, counts, owner);
+                Actions.Add action = new Actions.Add(add[0], add[1], turnID, owners, counts, forts, owner);
                 actionStack.Add(action);
                 Actions.Utilities.UpdateMapInfo(owners, counts, action);
             }
             foreach (LogUtility.Attack attack in turn.Value.attack)
             {
-                Actions.Attack action = new Actions.Attack(attack, turnID, owners, counts);
+                Actions.Attack action = new Actions.Attack(attack, turnID, owners, counts, forts);
                 actionStack.Add(action);
                 Actions.Utilities.UpdateMapInfo(owners, counts, action);
+                forts[action.target] = action.new_fort_troop;
             }
             if (turn.Value.fortify.number_of_troops != 0)
             {
-                Actions.Fortify action = new Actions.Fortify(turn.Value.fortify, turnID, owners, counts);
+                Actions.Fortify action = new Actions.Fortify(turn.Value.fortify, turnID, owners, counts, forts);
                 actionStack.Add(action);
                 Actions.Utilities.UpdateMapInfo(owners, counts, action);
             }
+
+            
+            int fortPlanet = -1;
+            for (int i = 0; i < turn.Value.fort.Length; i++)
+            {
+                if (turn.Value.fort[i] != forts[i])
+                {
+                    if (forts[i] == 0)
+                    {
+                        fortPlanet = i;
+                    }
+                }
+            }
+            turn.Value.fort.CopyTo(forts, 0);
+            if (fortPlanet >= 0)
+            {
+                Actions.Fort action = new Actions.Fort(fortPlanet, turn.Value.fort[fortPlanet], owners, counts, forts, turnID);
+                actionStack.Add(action);
+            }
+           
             turnID++;
         }
+        playerFinalScores = loadedLog.score;
     }
 
     private void OnEnable()
@@ -119,7 +142,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     IEnumerator RunAction(Actions.Action action)
     {
         currentTurn = action.turnId;
-        UpdateMapData(action.owners, action.counts);
+        UpdateMapData(action.owners, action.counts, action.forts);
         UpdateScoreboard(stackIndex);
         action.Perform(this);
         consoleUI.AddLogEntry(action.ToString());
@@ -130,15 +153,33 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         if(actionStack != null && stackIndex < actionStack.Count)
         {
             loopCoroutine = StartCoroutine (RunAction(actionStack[stackIndex]));
+        } else if (stackIndex == actionStack.Count)
+        {
+            if (playerFinalScores == null || playerFinalScores.Length == 0) yield break;
+            mainUI.ShowGameEndScreen(
+                "Player " + Array.IndexOf(playerFinalScores, playerFinalScores.Max()) + " Wins! (" + playerFinalScores.Max() + ")",
+                GetPlayerScoresMultiline());
         }
     }
 
-    void UpdateMapData(int[] owners, int[] counts)
+    string GetPlayerScoresMultiline()
+    {
+        string res = "";
+        for (int i = 0; i < playerFinalScores.Length; i++)
+        {
+            res += "Player " + i + ": " + playerFinalScores[i] + "\n";
+        }
+        return res;
+    }
+
+
+    void UpdateMapData(int[] owners, int[] counts, int[] forts)
     {
         for (int i = 0; i < owners.Length; i++)
         {
             planets[i].SetOwner(owners[i]);
             planets[i].TroopCount = counts[i];
+            planets[i].FortCount = forts[i];
         }
     }
 
@@ -220,6 +261,18 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         mainUI.FORTIFYManager(true, planets[info.path[0]].GetOwner(), info.number_of_troops, info.path[0], info.path[info.path.Length - 1]);
         ResetActionLine();
     }
+
+    public void PerformFort(int node, int amount)
+    {
+        foreach (Planet planet in planets)
+        {
+            planet.OnDeselect();
+        }
+        planets[node].FortCount = amount;
+        mainUI.FORTManager(true, planets[node].GetOwner(), amount, node);
+        ResetActionLine();
+    }
+
 
     public void SetPlayheadPos(int stackIndex)
     {

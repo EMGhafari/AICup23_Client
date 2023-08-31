@@ -1,13 +1,11 @@
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-using static UnityEngine.Rendering.DebugUI;
 
 public class UIMANAGER : MonoBehaviour
 {
@@ -97,10 +95,12 @@ public class UIMANAGER : MonoBehaviour
     [SerializeField] private GameObject Attack_eventUI;
     [SerializeField] private GameObject AddTroops_eventUI;
     [SerializeField] private GameObject Fortify_eventUI;
+    [SerializeField] private GameObject Fort_eventUI;
 
     public GameObject attack_display;
     public GameObject addtroops_display;
     public GameObject fortify_display;
+    public GameObject fort_display;
 
     public TextMeshProUGUI Attacker_name;
     public TextMeshProUGUI Defender_name;
@@ -116,9 +116,17 @@ public class UIMANAGER : MonoBehaviour
     public TextMeshProUGUI FortifyFrom;
     public TextMeshProUGUI FortifyTo;
     public TextMeshProUGUI FortifyAmount;
+    [Header("Fort")]
+    public TextMeshProUGUI fortAmountInt;
+    public TextMeshProUGUI playeraddingFort;
+    public TextMeshProUGUI PlanetaddingFort;
 
 
-
+    [Space(50)]
+    [Header("Game End")]
+    public GameObject gameEndPanel;
+    public Text gameEndMainText;
+    public Text gameEndSubText;
 
     ActionManager actionManager;
     PlayerStyles styles;
@@ -282,6 +290,30 @@ public class UIMANAGER : MonoBehaviour
         }
     }
 
+    public void FORTManager(bool isForting, int incharge, int troops, int planetnumber)
+    {
+        RESETACTIONManager();
+
+        playeraddingFort.text = "Player " + incharge;
+        fortAmountInt.text = troops.ToString();
+        PlanetaddingFort.text = planetnumber.ToString();
+
+        playeraddingFort.color = styles.GetStyle(incharge).color;
+        fortAmountInt.color = styles.GetStyle(incharge).color;
+        PlanetaddingFort.color = styles.GetStyle(incharge).color;
+
+        if (isForting)
+        {
+            fort_display.SetActive(true);
+            Fort_eventUI.SetActive(true);
+        }
+        else
+        {
+            fort_display.SetActive(false);
+            Fort_eventUI.SetActive(false);
+        }
+    }
+
     void RESETACTIONManager()
     {
         addtroops_display.SetActive(false);
@@ -290,6 +322,8 @@ public class UIMANAGER : MonoBehaviour
         Attack_eventUI.SetActive(false);
         fortify_display.SetActive(false);
         Fortify_eventUI.SetActive(false);
+        fort_display.SetActive(false);
+        Fort_eventUI.SetActive(false);
     }
 
 
@@ -360,6 +394,16 @@ public class UIMANAGER : MonoBehaviour
         cameraSettings.MovementSpeed = value;
     }
 
+
+
+    public void ShowGameEndScreen(string main, string sub)
+    {
+        gameEndPanel.SetActive(true);
+        gameEndMainText.text = main;
+        gameEndSubText.text = sub;
+    }
+
+
     //Buttons
     public void PlayandPause()
     {
@@ -398,5 +442,11 @@ public class UIMANAGER : MonoBehaviour
         masterMixer.SetFloat("MasterVolume", Mathf.Lerp(-40,10, settings.MasterVolume / 100));
         masterMixer.SetFloat("MusicVolume",  Mathf.Lerp(-40, 10, settings.MusicVolume / 100));
         masterMixer.SetFloat("SFXVolume",    Mathf.Lerp(-40, 10, settings.SFXVolume / 100));
+    }
+
+
+    public void Home()
+    {
+        SceneManager.LoadScene(0);
     }
 }

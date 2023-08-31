@@ -27,7 +27,7 @@ namespace Utilities
             List<ForceDirectedGraph.DataStructure.Node> nodes = new List<ForceDirectedGraph.DataStructure.Node>();
             for (int i = 0; i < map.number_of_nodes; i++)
             {
-                float size = map.strategic_nodes.Contains(i) ? map.scores_of_strategic_nodes[System.Array.IndexOf(map.strategic_nodes, i)] : 0;
+                int size = map.strategic_nodes.Contains(i) ? map.scores_of_strategic_nodes[System.Array.IndexOf(map.strategic_nodes, i)] : 0;
                 ForceDirectedGraph.DataStructure.Node currentNode = new ForceDirectedGraph.DataStructure.Node(System.Guid.NewGuid(), i.ToString(), Color.white, size);
                 nodes.Add(currentNode);
             }

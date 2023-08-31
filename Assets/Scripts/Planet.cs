@@ -25,19 +25,25 @@ public class Planet : MonoBehaviour, INode
 
     int value = 0;
 
-    bool IsFort { 
+    public int FortCount { 
         get
         {
-            return _IsFort;
+            return _FortCount;
         }
         set
         {
-            _IsFort = value;
-            shield.gameObject.SetActive(value);
-            shield.startColor =  owner >= 0 ? styles.GetStyle(owner).color : Color.white;
+            _FortCount = value;
+            if (value > 0)
+            {
+                shield.gameObject.SetActive(true);
+                shield.startColor = owner >= 0 ? styles.GetStyle(owner).color : Color.white;
+            } else
+            {
+                shield.gameObject.SetActive(false);
+            }
         }
     }
-    bool _IsFort = false;
+    int _FortCount = 0;
     bool isStrategic;
 
     [SerializeField] ParticleSystem shield;
@@ -77,7 +83,7 @@ public class Planet : MonoBehaviour, INode
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<Renderer>().isVisible)
+        if (GetComponent<MeshRenderer>().isVisible && checkVisibility())
         {
             canvasRootObject.gameObject.SetActive(true);
             canvasRootObject.position = cam.WorldToScreenPoint(transform.position);
@@ -86,6 +92,20 @@ public class Planet : MonoBehaviour, INode
             canvasRootObject.gameObject.SetActive(false);
         }
     }
+
+
+    bool checkVisibility()
+    {
+        Vector3 dir = transform.position - cam.transform.position;
+        if(Vector3.Angle(cam.transform.forward, dir) > cam.fieldOfView)
+        {
+            return false;
+        } else
+        {
+            return true;
+        }
+    }
+
 
     public override string ToString()
     {
@@ -117,7 +137,7 @@ public class Planet : MonoBehaviour, INode
 
     void UpdateUI()
     {
-        troopCountIndicatorText.text = TroopCount.ToString();
+        troopCountIndicatorText.text = TroopCount.ToString() + ((FortCount > 0) ? " (" + FortCount + ")" : "");
         troopCountIndicatorText.color = owner >= 0? styles.GetStyle(owner).color : new Color(0,0,0,0);
     }
 

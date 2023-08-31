@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d142cefb5b790840b580bc1dfb8b336, type: 3}
   m_Name: New Camera Settings
   m_EditorClassIdentifier: 
-  _AutoFocus: 1
+  _AutoFocus: 0
   _Sensitivity: 1
   _MovementSpeed: 10

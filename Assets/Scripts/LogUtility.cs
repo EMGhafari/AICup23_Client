@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 
-
 namespace Utilities
 {
     public static class LogUtility
@@ -11,6 +10,7 @@ namespace Utilities
         public class Log
         {
             public int[][] initialize;
+            public int[] score;
             public Dictionary<string, Turn> turns;
 
             public override string ToString()
@@ -37,6 +37,7 @@ namespace Utilities
             public int[][] add_troop;
             public Attack[] attack;
             public Fortify fortify;
+            public int[] fort;
 
             public override string ToString()
             {
@@ -63,6 +64,7 @@ namespace Utilities
             public int new_troop_count_attacker;
             public int new_troop_count_target;
             public int new_target_owner;
+            public int new_fort_troop;
 
             public override string ToString()
             {

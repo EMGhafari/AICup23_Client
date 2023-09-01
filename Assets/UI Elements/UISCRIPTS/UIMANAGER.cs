@@ -420,11 +420,11 @@ public class UIMANAGER : MonoBehaviour
     }
     public void Forward()
     {
-        GetComponent<UIMANAGER>().MainSlider.value++;
+        MainSlider.value++;
     }
     public void Backward()
     {
-        GetComponent<UIMANAGER>().MainSlider.value--;
+        MainSlider.value--;
     }
 
     private void OnEnable()
@@ -448,5 +448,21 @@ public class UIMANAGER : MonoBehaviour
     public void Home()
     {
         SceneManager.LoadScene(0);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayandPause();
+        }
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Backward();
+        }
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            Forward();
+        }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using UnityEngine;
 using Utilities;
 
@@ -38,18 +39,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         StartCoroutine(StartFirstPlayback());
     }
 
-    /*
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            foreach(Actions.Action action in actionStack)
-            {
-                Debug.Log(Actions.Utilities.ArrayToString(action.owners));
-            }
-        }
-    }
-    */
+    
 
     void LoadActions(int planetCount)
     {
@@ -272,7 +262,6 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         mainUI.FORTManager(true, planets[node].GetOwner(), amount, node);
         ResetActionLine();
     }
-
 
     public void SetPlayheadPos(int stackIndex)
     {

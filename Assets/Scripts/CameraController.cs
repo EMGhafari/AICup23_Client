@@ -114,7 +114,7 @@ public class CameraController : MonoBehaviour
         float x = Input.GetAxis("Mouse X");
         float y = -Input.GetAxis("Mouse Y");
 
-        float slowDown = Input.GetKey(KeyCode.Space) ? 0.1f : 1;
+        float slowDown = Input.GetKey(KeyCode.LeftControl) ? 0.1f : 1;
 
         transform.Rotate(Vector3.right, y * Time.unscaledDeltaTime * sensitivity * 100 * slowDown);
         transform.Rotate(Vector3.up, x * Time.unscaledDeltaTime * sensitivity * 100 * slowDown);
@@ -127,7 +127,7 @@ public class CameraController : MonoBehaviour
 
         bool shift = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && !Input.GetKey(KeyCode.Space);
 
-        float slowDown = Input.GetKey(KeyCode.Space) ? 0.1f : 1;
+        float slowDown = Input.GetKey(KeyCode.LeftControl) ? 0.1f : 1;
 
         transform.Translate((Vector3.forward * y * (y>0 ? forwardSpeed: backwardSpeed)
             + Vector3.right * x * strafeSpeed) * Time.unscaledDeltaTime * (shift?shiftMultiplier:1) * slowDown);

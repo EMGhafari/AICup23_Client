@@ -80,9 +80,9 @@ namespace Actions
         public override string ToString()
         {
             string result = owners[attacker] == new_target_owner ? "Success" : "Failure";
-            string output = base.ToString() + "Attacking from " + attacker + " to " + target + 
-                "\nResult: " + result +  divider + "New attacker troops: " + new_troop_count_attacker
-                + divider + "new target troops: " + new_troop_count_target + divider + "target owner: " + new_target_owner;
+            string output = base.ToString() + "Attacking from " + Utilities.BoldText(attacker) + " to " + Utilities.BoldText(target) + " (Result: " + Utilities.BoldText(result) + ")" +
+                "\nAttacker new: " + Utilities.BoldText(new_troop_count_attacker)
+                + divider + "target new: " + Utilities.BoldText(new_troop_count_target) + divider + "target owner: " + Utilities.BoldText(new_target_owner);
             return output;
         }
     }
@@ -110,7 +110,7 @@ namespace Actions
         }
         public override string ToString()
         {
-            string output = base.ToString() + "Fortifying " + number_of_troops + " troops" + divider + "Path: " + Utilities.ArrayToString(path);
+            string output = base.ToString() + "Fortifying " + Utilities.BoldText(number_of_troops) + " troops" + divider + "Path: " + Utilities.ArrayToString(path);
             return output;
         }
     }
@@ -135,7 +135,7 @@ namespace Actions
         }
         public override string ToString()
         {
-            string output = base.ToString() + "Adding " + amount + " troops to " + node;
+            string output = base.ToString() + "Adding " + Utilities.BoldText(amount) + " troops to " + Utilities.BoldText(node);
             return output;
         }
     }
@@ -158,7 +158,7 @@ namespace Actions
 
         public override string ToString()
         {
-            return base.ToString() + "Fort " + amount + " troops in " + node;
+            return base.ToString() + "Fort " + Utilities.BoldText(amount) + " troops in " + Utilities.BoldText(node);
         }
     }
 
@@ -216,6 +216,11 @@ namespace Actions
         {
             counts[action.path[0]] -= action.number_of_troops;
             counts[action.path[action.path.Length - 1]] += action.number_of_troops;
+        }
+
+        public static string BoldText<T>(T text)
+        {
+            return "<b>" + text.ToString() + "</b>";
         }
     }
 }

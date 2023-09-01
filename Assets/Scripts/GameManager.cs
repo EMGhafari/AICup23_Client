@@ -100,12 +100,26 @@ public class GameManager : MonoBehaviour
 
     public void Debug(string text, float time)
     {
-        StartCoroutine(RenderDebug(text, time));
+        if (current == null)
+        {
+            current = StartCoroutine(RenderDebug(text, time));
+        }
+        else {
+            StopCoroutine(current);
+            current = StartCoroutine(RenderDebug(text, time, true)); 
+        }
     }
 
-    IEnumerator RenderDebug(string text, float time)
+    Coroutine current;
+    IEnumerator RenderDebug(string text, float time , bool additive = false)
     {
-        debug.text = text;
+        if (!additive)
+        {
+            debug.text = text;
+        } else
+        {
+            debug.text += "\n" + text;
+        }
         float t = 0;
         while (t < 1)
         {
@@ -113,5 +127,6 @@ public class GameManager : MonoBehaviour
             debug.color = Color.Lerp(new Color(1,1,1,1), new Color(1,1,1,0), t);
             yield return null;
         }
+        current = null;
     }
 }

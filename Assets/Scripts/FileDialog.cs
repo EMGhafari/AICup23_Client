@@ -23,7 +23,64 @@ public class FileDialog : MonoBehaviour
             GameManager.Instance.Debug("Invalid file or path", 3);
         }
     }
-   
+
+    static bool loaded = false;
+    
+    public void Start()
+    {
+        if (!loaded)
+        {
+            CheckExternalPath();
+            loaded = true;
+        }
+    }
+
+    void CheckExternalPath()
+    {
+        string mapPath = Application.dataPath + "/Maps";
+        string logPath = Application.dataPath + "/Logs";
+
+        if (Directory.Exists(mapPath))
+        {
+            var allpaths = Directory.GetFiles(mapPath);
+            if (allpaths != null) mapPath = allpaths[0];
+            else mapPath = null;
+        } else
+        {
+            mapPath = null;
+        }
+
+        if (Directory.Exists(logPath))
+        {
+            var allpaths = Directory.GetFiles(logPath);
+            if (allpaths != null) logPath = allpaths[0];
+            else logPath = null;
+        } else
+        {
+            logPath = null;
+        }
+
+        if (mapPath != null)
+        {
+            string map = "";
+            readContent(mapPath, ref map);
+            GameManager.Instance.setMap(map);
+        } else
+        {
+            GameManager.Instance.Debug("Maps folder path doesn't contain a file or is invalid" , 3);
+        }
+
+        if (logPath != null)
+        {
+            string log = "";
+            readContent(logPath, ref log);
+            GameManager.Instance.setLog(log);
+        }
+        else
+        {
+            GameManager.Instance.Debug("Logs folder path doesn't contain a file or is invalid", 3);
+        }
+    }
 
     public void OpenLog()
     {

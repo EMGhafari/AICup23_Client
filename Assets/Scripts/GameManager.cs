@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Random.InitState(69);
     }
     // Start is called before the first frame update
     void Start()

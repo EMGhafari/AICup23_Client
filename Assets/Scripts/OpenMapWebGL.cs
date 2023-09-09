@@ -31,7 +31,6 @@ public class OpenMapWebGL : MonoBehaviour, IPointerDownHandler
     {
         var loader = UnityWebRequest.Get(url);
         yield return loader.SendWebRequest();
-
         Debug.Log(loader.downloadHandler.text);
         GameManager.Instance.setMap(loader.downloadHandler.text);
     }

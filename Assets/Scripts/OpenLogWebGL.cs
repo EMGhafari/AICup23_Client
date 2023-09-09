@@ -29,7 +29,7 @@ public class OpenLogWebGL : MonoBehaviour, IPointerDownHandler
 
     private IEnumerator OutputRoutine(string url)
     {
-        var loader =  UnityWebRequest.Get(url);
+        var loader = UnityWebRequest.Get(url);
         yield return loader.SendWebRequest();
         Debug.Log(loader.downloadHandler.text);
         GameManager.Instance.setLog(loader.downloadHandler.text);

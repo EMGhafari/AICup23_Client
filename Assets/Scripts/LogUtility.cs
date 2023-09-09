@@ -7,6 +7,7 @@ namespace Utilities
 {
     public static class LogUtility
     {
+        [System.Serializable]
         public class Log
         {
             public int[][] initialize;
@@ -29,7 +30,7 @@ namespace Utilities
                 return toString;
             }
         }
-
+        [System.Serializable]
         public class Turn
         {
             public int[] nodes_owner;
@@ -56,7 +57,7 @@ namespace Utilities
                 return toString;
             }
         }
-
+        [System.Serializable]
         public struct Attack
         {
             public int attacker;
@@ -72,7 +73,7 @@ namespace Utilities
                     + ")    Target: " + target.ToString() + " (new troops: " + new_troop_count_target + ")  NewOwner: " + new_target_owner;
             }
         }
-
+        [System.Serializable]
         public struct Fortify
         {
             public int number_of_troops;
@@ -101,5 +102,4 @@ namespace Utilities
             return JsonConvert.DeserializeObject<Log>(json);
         }
     }
-
 }

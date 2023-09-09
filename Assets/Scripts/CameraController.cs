@@ -111,6 +111,8 @@ public class CameraController : MonoBehaviour
 
     void HandleRotation()
     {
+        if (!Input.GetMouseButton(2) && !Input.GetKey(KeyCode.R) && !Input.GetKey(KeyCode.LeftShift)) return;
+
         float x = Input.GetAxis("Mouse X");
         float y = -Input.GetAxis("Mouse Y");
 

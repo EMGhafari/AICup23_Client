@@ -17,22 +17,12 @@ public class GameManager : MonoBehaviour
         if(Instance  == null)
         {
             Instance = this;
+            Random.InitState(1);
             DontDestroyOnLoad(gameObject);
         } else
         {
             Destroy(gameObject);
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public string getLog()

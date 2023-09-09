@@ -205,9 +205,8 @@ namespace ForceDirectedGraph
         /// </summary>
         private void ShuffleNodes()
         {
-            System.Random random = new System.Random();
             foreach (var node in GraphNodes.Values)
-                node.ApplyForces(new List<Vector3>() { new Vector3(random.Next(-10, 10) / 10f, random.Next(-10, 10) / 10f, random.Next(-10, 10) / 10f) }, true);
+                node.ApplyForces(new List<Vector3>() { new Vector3(UnityEngine.Random.Range(-10, 10) / 10f, UnityEngine.Random.Range(-10, 10) / 10f, UnityEngine.Random.Range(-10, 10) / 10f) }, true);
         }
 
         #endregion

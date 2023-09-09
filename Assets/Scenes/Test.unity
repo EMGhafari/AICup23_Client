@@ -176,7 +176,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -561,9 +561,9 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -25, y: 50}
-  m_SizeDelta: {x: 375, y: 350}
+  m_SizeDelta: {x: 375, y: -650}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &220171934
 MonoBehaviour:
@@ -6339,13 +6339,19 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -59.80005
       objectReference: {fileID: 0}
+    - target: {fileID: 580048006899990876, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -159.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301154026450512783, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
+      propertyPath: m_text
+      value: "<b>Shortcuts:</b>\n<b>Space:</b> \n\tPlay / Pause\n<b>Q:</b>\t1 action
+        back\n<b>E:</b>\t1 action forward\n<b>MouseWheel / R:</b>\n\trotate camera\n<b>LControl:</b>
+        \n\tslow camera"
+      objectReference: {fileID: 0}
     - target: {fileID: 5998562013071534713, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5998562013176212713, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 5998562013193143955, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
       propertyPath: m_SizeDelta.y
@@ -6354,10 +6360,6 @@ PrefabInstance:
     - target: {fileID: 5998562013279097918, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5998562013727999776, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5998562013727999783, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6371,21 +6373,13 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5998562014554644723, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
+    - target: {fileID: 5998562014260761948, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5998562014925363072, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5998562014925363072, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5998562014925363072, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 283.8
+    - target: {fileID: 5998562014482334472, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5998562015069359907, guid: abc2e5cf3630de9469bd9e9d880c14b1, type: 3}
       propertyPath: m_Pivot.x
@@ -7097,6 +7091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textUI: {fileID: 536383132}
+  triggerName: Start
 --- !u!95 &1822896012
 Animator:
   serializedVersion: 5
@@ -7170,7 +7165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 0
   method: 1
-  lifetime: 4
+  lifetime: 4.5
 --- !u!1 &1907631573
 GameObject:
   m_ObjectHideFlags: 0
@@ -7423,7 +7418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
+  m_sendNavigationEvents: 0
   m_DragThreshold: 10
 --- !u!4 &1914905222
 Transform:

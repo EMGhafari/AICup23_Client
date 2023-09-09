@@ -44,7 +44,6 @@ public class Planet : MonoBehaviour, INode
         }
     }
     int _FortCount = 0;
-    bool isStrategic;
 
     [SerializeField] ParticleSystem shield;
 

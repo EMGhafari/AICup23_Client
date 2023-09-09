@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using UnityEngine;
 using Utilities;
 
@@ -43,7 +42,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
 
     void LoadActions(int planetCount)
     {
-        int turnID = 0;
+        int turnID = 1;
         actionStack = new List<Actions.Action>();
 
         string logJson = GameManager.Instance == null ? testJSON : GameManager.Instance.getLog();
@@ -118,6 +117,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     void OnDisable()
     {
         Planet.OnPlanetCreated -= RegisterPlanet;
+        Physics.autoSimulation = true;
     }
 
     int currentTurn = 0;
@@ -125,8 +125,9 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     IEnumerator StartFirstPlayback()
     {
         Time.timeScale = 10;
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(4);
         Time.timeScale = 1;
+        Physics.autoSimulation = false;
     }
 
     IEnumerator RunAction(Actions.Action action)

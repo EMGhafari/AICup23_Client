@@ -52,13 +52,15 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         int[] owners = new int[planetCount];
         int[] counts = new int[planetCount];
         int[] forts = new int[planetCount];
+        string[] performers = loadedLog.team_names?.Length > 0 ? loadedLog.team_names : new string[] { "Player 1", "Player 2", "Player 3", "Player 4" };
         for(int i = 0; i < planetCount; i++) { owners[i] = -1; }
 
         foreach(int[] move in loadedLog.initialize)
         {
-            Actions.Add action = new Actions.Add(move[1], 1, turnID++, owners, counts, forts, move[0]);
+            Actions.Add action = new Actions.Add(move[1], 1, turnID, performers[turnID % 3], owners, counts, forts, move[0]);
             actionStack.Add(action);
             Actions.Utilities.UpdateMapInfo(owners, counts, action);
+            turnID++;
         }
         foreach (KeyValuePair<string,LogUtility.Turn> turn in loadedLog.turns)
         {
@@ -68,20 +70,20 @@ public class ActionManager : MonoBehaviour , IActionPerformer
             foreach (int[] add in turn.Value.add_troop)
             {
                 int? owner = owners[add[0]] == -1 ? turnID % 3 : null;
-                Actions.Add action = new Actions.Add(add[0], add[1], turnID, owners, counts, forts, owner);
+                Actions.Add action = new Actions.Add(add[0], add[1], turnID, performers[turnID % 3], owners, counts, forts, owner);
                 actionStack.Add(action);
                 Actions.Utilities.UpdateMapInfo(owners, counts, action);
             }
             foreach (LogUtility.Attack attack in turn.Value.attack)
             {
-                Actions.Attack action = new Actions.Attack(attack, turnID, owners, counts, forts);
+                Actions.Attack action = new Actions.Attack(attack, turnID, performers[turnID % 3], owners, counts, forts);
                 actionStack.Add(action);
                 Actions.Utilities.UpdateMapInfo(owners, counts, action);
                 forts[action.target] = action.new_fort_troop;
             }
             if (turn.Value.fortify.number_of_troops != 0)
             {
-                Actions.Fortify action = new Actions.Fortify(turn.Value.fortify, turnID, owners, counts, forts);
+                Actions.Fortify action = new Actions.Fortify(turn.Value.fortify, turnID, performers[turnID % 3], owners, counts, forts);
                 actionStack.Add(action);
                 Actions.Utilities.UpdateMapInfo(owners, counts, action);
             }
@@ -101,13 +103,18 @@ public class ActionManager : MonoBehaviour , IActionPerformer
             turn.Value.fort.CopyTo(forts, 0);
             if (fortPlanet >= 0)
             {
-                Actions.Fort action = new Actions.Fort(fortPlanet, turn.Value.fort[fortPlanet], owners, counts, forts, turnID);
+                Actions.Fort action = new Actions.Fort(fortPlanet, turn.Value.fort[fortPlanet], owners, counts, forts, turnID, performers[turnID % 3]);
                 actionStack.Add(action);
             }
            
             turnID++;
         }
         playerFinalScores = loadedLog.score;
+
+        for(int i =0; i < performers.Length; i++)
+        {
+            playerStyles.ChangeStyle(i, performers[i]);
+        }
     }
 
     private void OnEnable()
@@ -148,7 +155,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         {
             if (playerFinalScores == null || playerFinalScores.Length == 0) yield break;
             mainUI.ShowGameEndScreen(
-                "Player " + Array.IndexOf(playerFinalScores, playerFinalScores.Max()) + " Wins! (" + playerFinalScores.Max() + ")",
+                playerStyles.GetStyle(Array.IndexOf(playerFinalScores, playerFinalScores.Max())).name + " Wins! (" + playerFinalScores.Max() + ")",
                 GetPlayerScoresMultiline());
         }
     }
@@ -158,7 +165,7 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         string res = "";
         for (int i = 0; i < playerFinalScores.Length; i++)
         {
-            res += "Player " + i + ": " + playerFinalScores[i] + "\n";
+            res += playerStyles.GetStyle(i).name + ": " + playerFinalScores[i] + "\n";
         }
         return res;
     }

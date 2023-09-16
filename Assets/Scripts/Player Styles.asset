@@ -22,9 +22,13 @@ MonoBehaviour:
   playerStyles:
   - avatarIndex: 0
     colorIndex: 0
+    name: Player 1
   - avatarIndex: 0
     colorIndex: 1
+    name: Player 2
   - avatarIndex: 0
     colorIndex: 2
+    name: Player 3
   - avatarIndex: 0
     colorIndex: 3
+    name: Player 4

@@ -12,8 +12,9 @@ namespace Actions
         public int[] counts;
         public int[] forts;
 
-        public Action(int turnId, int[] owners, int[] counts, int[] forts)
+        public Action(int turnId, string performer, int[] owners, int[] counts, int[] forts)
         {
+            this.performer = performer;
             this.turnId = turnId;
             this.owners = (int[])owners.Clone();
             this.counts = (int[])counts.Clone();
@@ -29,6 +30,7 @@ namespace Actions
         }
 
         public int turnId;
+        public string performer;
         public float durationMultiplyer;
         public Type type;
         protected const string divider = "\t\t";
@@ -38,7 +40,7 @@ namespace Actions
 
         public override string ToString()
         {
-            return turnId + ": ";
+            return turnId + ": " + performer + ": ";
         }
     }
 
@@ -52,7 +54,7 @@ namespace Actions
         public int new_fort_troop;
 
 
-        public Attack(LogUtility.Attack attack , int turnId, int[] owners, int[] counts, int[] forts) : base(turnId, owners, counts, forts) 
+        public Attack(LogUtility.Attack attack , int turnId, string performer, int[] owners, int[] counts, int[] forts) : base(turnId, performer, owners, counts, forts) 
         {
             type = Type.attack;
             durationMultiplyer = 1;
@@ -91,8 +93,8 @@ namespace Actions
     {
         public int number_of_troops;
         public int[] path;
-        public Fortify(LogUtility.Fortify fortify, int turnId, int[] owners, int[] counts, int[] forts)
-            : base(turnId, owners, counts, forts)
+        public Fortify(LogUtility.Fortify fortify, int turnId, string performer, int[] owners, int[] counts, int[] forts)
+            : base(turnId, performer, owners, counts, forts)
         {
             type = Type.fortify;
             durationMultiplyer = 0.75f;
@@ -117,8 +119,8 @@ namespace Actions
 
     public class Add:Action
     {
-        public Add(int node, int amount, int turnId, int[] owners, int[] counts, int[] forts, int? owner = null)
-            : base(turnId, owners, counts, forts)
+        public Add(int node, int amount, int turnId, string performer, int[] owners, int[] counts, int[] forts, int? owner = null)
+            : base(turnId, performer, owners, counts, forts)
         {
             type = Type.add;
             durationMultiplyer = 0.2f;
@@ -145,7 +147,7 @@ namespace Actions
         int node;
         int amount;
 
-        public Fort(int node, int amount, int[] owners, int[] counts, int[] forts, int turnId) : base(turnId,owners,counts, forts)
+        public Fort(int node, int amount, int[] owners, int[] counts, int[] forts, int turnId, string performer) : base(turnId,performer,owners,counts, forts)
         {
             durationMultiplyer = 0.35f;
             this.node = node;

@@ -35,5 +35,10 @@ public class OpenMapWebGL : MonoBehaviour, IPointerDownHandler
         GameManager.Instance.setMap(loader.downloadHandler.text);
     }
 
+#else
+    public void OnPointerDown(PointerEventData eventData)
+    {
+
+    }
 #endif
 }

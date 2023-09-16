@@ -148,9 +148,9 @@ public class UIMANAGER : MonoBehaviour
         {
             PlayerFlags[i].color = styles.GetStyle(i).color;
             PlayerFlags[i].transform.parent.gameObject.SetActive(true);
-            TeamNames_Dis[i].text = "Player " + i;
+            TeamNames_Dis[i].text = styles.GetStyle(i).name;
             Names_Dis[i].gameObject.SetActive(true);
-            Names_Dis[i].text = "Player " + i;
+            Names_Dis[i].text = styles.GetStyle(i).name;
             PlanetNumber_Dis[i].text = 0.ToString();
             Troops_Dis[i].text = 0.ToString();
         }
@@ -211,7 +211,7 @@ public class UIMANAGER : MonoBehaviour
         RESETACTIONManager();
 
         //attacker color
-        Attacker_name.text = "Player " + incharge;
+        Attacker_name.text = styles.GetStyle(incharge).name;
         Attacker_Troops.text = attacktroops.ToString();
        
         Attacker_name.color = styles.GetStyle(incharge).color;
@@ -219,7 +219,7 @@ public class UIMANAGER : MonoBehaviour
        
 
         //defender color
-        Defender_name.text = "Player " + defender;
+        Defender_name.text = styles.GetStyle(defender).name;
         Defender_Troops.text = defendtroops.ToString();
        
         Defender_name.color = styles.GetStyle(defender).color;
@@ -243,7 +243,7 @@ public class UIMANAGER : MonoBehaviour
     {
         RESETACTIONManager();
 
-        playeradding.text = "Player " + incharge;
+        playeradding.text = styles.GetStyle(incharge).name;
         addtoopsint.text = troops.ToString();
         Planetadding.text = planetnumber.ToString();
         
@@ -267,7 +267,7 @@ public class UIMANAGER : MonoBehaviour
     {
         RESETACTIONManager();
 
-        playerFortifying.text = "Player " + incharge;
+        playerFortifying.text = styles.GetStyle(incharge).name;
         FortifyAmount.text = troops.ToString();
         FortifyFrom.text = from.ToString();
         FortifyTo.text = to.ToString();
@@ -294,7 +294,7 @@ public class UIMANAGER : MonoBehaviour
     {
         RESETACTIONManager();
 
-        playeraddingFort.text = "Player " + incharge;
+        playeraddingFort.text = styles.GetStyle(incharge).name;
         fortAmountInt.text = troops.ToString();
         PlanetaddingFort.text = planetnumber.ToString();
 

@@ -35,5 +35,10 @@ public class OpenLogWebGL : MonoBehaviour, IPointerDownHandler
         GameManager.Instance.setLog(loader.downloadHandler.text);
     }
 
+#else
+    public void OnPointerDown(PointerEventData eventData)
+    {
+
+    }
 #endif
 }

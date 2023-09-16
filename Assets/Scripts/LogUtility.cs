@@ -12,6 +12,7 @@ namespace Utilities
         {
             public int[][] initialize;
             public int[] score;
+            public string[] team_names;
             public Dictionary<string, Turn> turns;
 
             public override string ToString()

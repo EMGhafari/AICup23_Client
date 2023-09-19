@@ -938,7 +938,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 03
+  m_Text: 05
 --- !u!222 &536383133
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7191,7 +7191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 0
   method: 1
-  lifetime: 4.5
+  lifetime: 6.5
 --- !u!1 &1907631573
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,7 +38,6 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         StartCoroutine(StartFirstPlayback());
     }
 
-    
 
     void LoadActions(int planetCount)
     {
@@ -48,20 +47,26 @@ public class ActionManager : MonoBehaviour , IActionPerformer
         string logJson = GameManager.Instance == null ? testJSON : GameManager.Instance.getLog();
         LogUtility.Log loadedLog = LogUtility.Deserialize(logJson);
 
-
         int[] owners = new int[planetCount];
         int[] counts = new int[planetCount];
         int[] forts = new int[planetCount];
-        string[] performers = loadedLog.team_names?.Length > 0 ? loadedLog.team_names : new string[] { "Player 1", "Player 2", "Player 3", "Player 4" };
-        for(int i = 0; i < planetCount; i++) { owners[i] = -1; }
+        string[] performers = loadedLog.team_names?.Length > 0 ? loadedLog.team_names : new string[] { "Player 1", "Player 2", "Player 3", "Player 4"};
+        for (int i = 0; i < planetCount; i++) { owners[i] = -1; }
 
-        foreach(int[] move in loadedLog.initialize)
+        foreach (int[] move in loadedLog.initialize)
         {
-            Actions.Add action = new Actions.Add(move[1], 1, turnID, performers[turnID % 3], owners, counts, forts, move[0]);
+            Actions.Add action = new Actions.Add(move[1], 1, turnID, performers[move[0]], owners, counts, forts, move[0]);
             actionStack.Add(action);
             Actions.Utilities.UpdateMapInfo(owners, counts, action);
             turnID++;
         }
+
+        if (loadedLog.turns != null) {
+            var turnNames = loadedLog.turns.Keys.ToList();
+            turnNames.Sort();
+            turnID = int.Parse(new string(turnNames[0].Where(x => char.IsDigit(x)).ToArray()));
+        }
+
         foreach (KeyValuePair<string,LogUtility.Turn> turn in loadedLog.turns)
         {
             //actionStack.Add(new Actions.Update(turn.Value.nodes_owner, turn.Value.troop_count, turnID));
@@ -131,8 +136,8 @@ public class ActionManager : MonoBehaviour , IActionPerformer
     Coroutine loopCoroutine = null;
     IEnumerator StartFirstPlayback()
     {
-        Time.timeScale = 10;
-        yield return new WaitForSecondsRealtime(4);
+        Time.timeScale = 3;
+        yield return new WaitForSecondsRealtime(6);
         Time.timeScale = 1;
         Physics.autoSimulation = false;
     }
